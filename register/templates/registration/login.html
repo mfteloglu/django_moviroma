@@ -1,0 +1,55 @@
+
+<!-- 
+{% load crispy_forms_tags %}
+
+     <form method="POST" class="from-group">
+	{% csrf_token %}
+	{{ form|crispy }}
+	<p>Don't have an accoount? Create one <a href="/register">here</a></p>
+	<button type="submit" class="btn btn-success">Login</button>	
+    </form> -->
+
+	<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="icon" href="./img/favicon.ico" type="image/x-icon" />
+  <title>MOVIROMA</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/home_login_ana.css" %}">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+	{% load crispy_forms_tags %}
+	<div class="home_main">
+		<div class="home_sol">
+			<img src="./img/signup_photo.png">
+		</div>
+		<div class="home_sag">
+			<div class="home_sag_top">
+				<div class="logo">
+					<img src="./img/logo.png">
+				</div>
+				<div class="signup_form_main">
+					
+
+					<form method="POST" class="from-group">
+				   {% csrf_token %}
+				   {{ form|crispy }}
+				   <p>Don't have an accoount? Create one <a href="/register">here</a></p>
+				   <button type="submit" class="btn btn-success">Login</button>	
+				   </form>
+					<hr style="width:100%;text-align:left;margin-left:0">
+					<h2><a href="#">Şifreni mi unuttun?</a></h2>
+				</div>
+			</div>
+			<div class="home_sag_bottom">
+				<h2>Hesabın yok mu? <a href="#">KAYDOL</a></h2>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

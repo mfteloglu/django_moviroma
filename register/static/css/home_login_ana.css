@@ -1,0 +1,124 @@
+@import url(./fonts.css);
+
+body{background-color:#18313A;}
+*{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+}
+
+.home_main{
+	margin: auto;
+	width: 1270px;
+	height:100%;
+}
+
+.home_main .home_sol{
+	padding-top: 30px;
+	float:left;
+}
+
+.home_main .home_sag{
+	float:left;
+	width:546px;
+	height:670px;
+	margin-top: 30px;
+	margin-left: 10px;
+}
+
+.home_main .home_sag .home_sag_top{
+	width: 100%;
+	height: 490px;
+	background-color: #264653;
+  	border-style: solid;
+  	border-width: 1px;
+  	border-color: #BEBEBE;
+}
+
+
+.home_main .home_sag .home_sag_bottom{
+	width: 100%;
+	height: 165px;
+	margin-top: 10px;
+	background-color: #264653;
+  	border-style: solid;
+  	border-width: 1px;
+  	border-color: #BEBEBE;
+}
+
+.home_sag .home_sag_top .logo{
+	margin-left:177px;
+	width:auto;
+	height: 192px;
+}
+
+.home_sag .home_sag_top .signup_form_main{
+	height: 298px;
+	width:200px;
+	margin:auto;
+}
+
+.fieldWrapper1 {
+  width: 100%;
+  padding: 8px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #BEBEBE;
+  background-color: #FFFFFF;
+}
+
+.fieldWrapper2 {
+  width: 100%;
+  padding: 8px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: #FFFFFF;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #BEBEBE;
+}
+
+.signup_button_home{
+  background-color: #2A9D8F; /* Green */
+  border: none;
+  color: white;
+  width: 100%;
+  padding: 8px 20px;
+  margin: 8px 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.signup_button_home a{
+  color:white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.home_sag .home_sag_top .signup_form_main h2{
+	padding-top: 30px;
+	padding-left: 18px;
+}
+.home_sag .home_sag_top .signup_form_main h2 a{
+	color:white;
+	font-size: 20px;
+}
+
+.home_sag .home_sag_bottom h2{
+	color:white;
+	font-size: 20px;
+	padding-top: 70px;
+	padding-left: 150px;
+}
+
+.home_sag .home_sag_bottom h2 a{
+	color: #E76F51;
+	font-size: 20px;
+}

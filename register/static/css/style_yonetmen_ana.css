@@ -1,0 +1,519 @@
+@import url(./fonts.css);
+
+body{background-color:#264653;}
+*{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+}
+
+.sol_main{
+	float:left;
+	width: 16%;
+	height: 1800PX;
+	background-color: #18313A;
+}
+.orta_main{
+	float:left;
+	width: 69%;
+}
+.sag_main{
+	float:left;
+	width: 15%;
+	height: 1800px;
+	background-color: #18313A;
+}
+
+.sol_main .sol_menu_main{
+	width: 100%;
+	height: auto;
+	border-bottom-style: solid;
+	border-width: 1px;
+	border-color: #BEBEBE;
+}
+
+.sol_main .sol_list_library{
+	border-bottom-style: solid;
+	border-width: 1px;
+	border-color: #BEBEBE;
+}
+
+.sol_main ul li{
+	width: 100%;
+	height: 30px;
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-right: 10px;
+}
+
+.sol_main ul li a{
+	display: block;
+	color: white;
+}
+
+.orta_main .orta_top_main{
+	width: 100%;
+	height:250px;
+	background-image: url(../img/emin_alper_cover.png);
+}
+
+.orta_main .orta_top_main .orta_top_sag_main{
+	width: 20%;
+	height: 250px;
+	float:right;
+}
+
+.orta_main .orta_top_main .orta_top_sol_main{
+	width: 80%;
+	height: 250px;
+	float: left;
+
+}
+
+.orta_main .orta_top_main .orta_top_sol_main .verify_main{
+	width: 100%;
+	height: 20%;
+	float:left;
+}
+.orta_main .orta_top_main .orta_top_sol_main .artist_name_main{
+	width: 100%;
+	height: 40%;
+	float:left;	
+}
+.orta_main .orta_top_main .orta_top_sol_main .buttons_main{
+	width: 100%;
+	height:20%;
+	float:left;
+}
+.orta_main .orta_top_main .orta_top_sol_main .menu_main{
+	width: 100%;
+	height:20%;
+	float:left;
+}
+.orta_main .orta_top_main .orta_top_sol_main .artist_name_main p{
+	font-size: 88px;
+	color: white;
+	padding-left: 40px;
+}
+
+.orta_main .orta_top_main .orta_top_sag_main .takipciler_main p{
+	font-size: 14px;
+	color: white;
+	text-align: right;
+	padding-top: 150px;
+	padding-right: 20px;
+}
+
+.orta_main .orta_top_main .orta_top_sol_main .verify_main .verify_top{
+	width: 100%;
+	height: 98%;
+}
+.orta_main .orta_top_main .orta_top_sol_main .verify_main .verify_bottom{
+	width: 100%;
+	height: 2%;
+	padding-left: 48px;
+	color: white;
+}
+
+.orta_main .orta_top_main .orta_top_sol_main .menu_main ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  padding-top: 10px;
+}
+
+.orta_main .orta_top_main .orta_top_sol_main .menu_main ul li{
+	float: left;
+}
+.orta_main .orta_top_main .orta_top_sol_main .menu_main ul li a{
+  display: block;
+  color: white;
+  text-align: center;
+  padding-left:50px;
+  text-decoration: none;
+}
+
+.orta_main .orta_top_main .orta_top_sol_main .menu_main ul li a:hover{
+	color: #2A9D8F
+}
+
+.orta_main .orta_top_main .orta_top_sol_main .buttons_main{
+	padding-left: 50px;
+	padding-top: 10px;
+}
+
+.button_follow_green{
+  background-color: #2A9D8F; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 25px;	
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+
+}
+
+.button_more_orange{
+  background-color: #E76F51; 
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 24px;	
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+}
+
+
+.main .orta_main .orta_bottom_main .latest_from_artist_main{
+	width: 70%;
+	height: 180px;
+	float: left;
+}
+
+.main .orta_main .orta_bottom_main .message_from_artist_main{
+	width: 30%;
+	height: 360px;
+	float: right;
+}
+
+.main .orta_main .orta_bottom_main .popular_film_from_artist_main{
+	width: 70%;
+	height: 180px;
+	float: left;
+}
+
+
+.main .orta_main .orta_bottom_main .message_from_artist_main h2{
+	text-align: left;
+	color:white;
+	padding-top: 20px;
+	padding-left:20px;
+}
+
+
+.main .orta_main .orta_bottom_main .message_from_artist_main p{
+	text-align: center;
+	color:white;
+	padding-top: 20px;
+}
+
+
+.main .orta_main .orta_bottom_main .latest_from_artist_main .latest_from_artist_bottom .latest_from_artist_sol_bosluk{
+	width: 5%;
+	height: 100%;
+	float: left;
+}
+
+.main .orta_main .orta_bottom_main .latest_from_artist_main .latest_from_artist_bottom .latest_from_artist_left{
+	width: 15%;
+	height: 100%;
+	background-image: url(../img/kiz_kardesler_afis_yeni.png);
+	float: left;
+}
+
+
+
+.main .orta_main .orta_bottom_main .latest_from_artist_main .latest_from_artist_bottom .latest_from_artist_right{
+	width: 80%;
+	height: 100%;
+	float: left;
+}
+
+.main .orta_main .orta_bottom_main .latest_from_artist_main .latest_from_artist_bottom{
+	width: 100%;
+	height: 80%;
+	float: left;
+}
+
+.main .orta_main .orta_bottom_main .latest_from_artist_main .latest_from_artist_top{
+	width: 100%;
+	height: 20%;
+	float: left;
+}
+
+.main .orta_main .orta_bottom_main .latest_from_artist_main .latest_from_artist_top h2{
+	padding-left: 50px;
+	padding-top: 8px;
+	color:white;
+	font-size: 18px;
+}
+
+.main .orta_main .orta_bottom_main .latest_from_artist_main .latest_from_artist_bottom .latest_from_artist_right h2{
+	color:white;
+	padding-left: 24px;
+	padding-top:30px;
+}
+
+.main .orta_main .orta_bottom_main .latest_from_artist_main .latest_from_artist_bottom .latest_from_artist_right p{
+	color: #BEBEBE;
+	padding-left: 24px;
+	padding-top:5px;
+}
+
+.main .orta_main .orta_bottom_main .popular_film_from_artist_main .popular_film_title_main{
+	width: 100%;
+	height: 20%;
+	float: left;
+}
+
+.main .orta_main .orta_bottom_main .popular_film_from_artist_main .popular_film_bottom{
+	width: 100%;
+	height: 80%;
+	float: left;
+}
+
+.main .orta_main .orta_bottom_main .popular_film_from_artist_main .popular_film_title_main h2{
+	color: white;
+	padding-left:50px;
+	font-size: 18px;
+	padding-top:15px;
+}
+
+.main .orta_main .orta_bottom_main .popular_film_from_artist_main .popular_film_bottom .popular_film_component_frame{
+	float: center;
+	width:80%;
+	height: 105px;
+	margin:auto;
+	margin-top: 18px;
+}
+
+.main .orta_main .orta_bottom_main .popular_film_from_artist_main .popular_film_bottom .popular_film_component_frame .popular_film_component{
+	width: 100%;
+	height: 35px;
+	border-style: solid;
+  	border-width: 1px;
+  	border-color: #BEBEBE;
+}
+
+.main .orta_main .orta_bottom_main .popular_film_from_artist_main .popular_film_bottom .popular_film_component_frame .popular_film_component .film_component_first{
+	width: 5%;
+	height: 100%;
+	float: left;
+}
+
+.main .orta_main .orta_bottom_main .popular_film_from_artist_main .popular_film_bottom .popular_film_component_frame .popular_film_component .film_component_second{
+	width: 10%;
+	height: 50%;
+	margin-top:10px;
+	float: left;
+	color:white;
+	text-align: center;
+
+}
+
+.main .orta_main .orta_bottom_main .popular_film_from_artist_main .popular_film_bottom .popular_film_component_frame .popular_film_component .film_component_third{
+	width: 30%;
+	height: 50%;
+	margin-top:10px;
+	float: left;
+	color:white;
+	text-align: left;
+}
+
+.main .orta_main .orta_bottom_main .popular_film_from_artist_main .popular_film_bottom .popular_film_component_frame .popular_film_component .film_component_fourth{
+	width: 55%;
+	height: 50%;
+	margin-top:10px;
+	float: left;
+	color:white;
+	text-align: right;
+}
+
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main{
+	float:left;
+	height: 270px;
+	width: 100%;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sol{
+	float:left;
+	height: 100%;
+	width: 5%;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_orta{
+	float:left;
+	height: 100%;
+	width: 20%;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag{
+	float:left;
+	height: 100%;
+	width: 75%;
+}
+
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_top_main {
+	width: 100%;
+	height:60%;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_bottom_main {
+	width: 100%;
+	height:40%;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_top_main .filmography_sag_first{
+	width:100%;
+	height:20%;
+	padding-left:10px;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_top_main .filmography_sag_second{
+	width:100%;
+	height:80%;
+	padding-left:10px;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_bottom_main .filmography_sag_third{
+	float: left;
+	width:20%;
+	height:100%;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_bottom_main .filmography_sag_fourth{
+	float: left;
+	width:80%;
+	height:100%;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_top_main .filmography_sag_first h2{
+	color:white;
+	font-size: 18px;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_top_main .filmography_sag_second p{
+	color:white;
+	font-size: 14px;
+	text-align: left;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_bottom_main .filmography_sag_third .button_filmography_white{
+  background-color: #E76F51; 
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 24px;	
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_bottom_main .filmography_sag_fourth .button_filmography_community_rating{
+  background-color: #E76F51; 
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 24px;	
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_bottom_main .filmography_sag_fourth .button_filmography_duration{
+  background-color: #E76F51; 
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 24px;	
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+
+.main .orta_main .orta_bottom_main .filmography_component_from_artist_main .filmography_component_sag .filmography_component_bottom_main .filmography_sag_fourth .button_filmography_imdb_rating{
+  background-color: #E76F51; 
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 24px;	
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.main .orta_main .orta_bottom_main .filmography_title h2{
+	color:white;
+	padding-left: 50px;
+	font-size: 18px;
+	padding-bottom: 10px;
+}
+
+
+
+.nav-item .nav-link a{
+	color:white;
+}
+
+
+.top-menu-user{
+	width: 60%;
+	position: relative;
+	margin: auto;
+}
+
+.top-menu-user ul li{
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+
+.top-menu-user ul li a{
+	color: white;
+}
+
+.top-menu-user .button_follow_green{
+	margin-left: 10px;
+	display: block;
+}
+
+.top-menu-user ul li p{
+	color: white;
+}
+
+
+svg{
+	width: 20px;
+	height: 20px;
+}

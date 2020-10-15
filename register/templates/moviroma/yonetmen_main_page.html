@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+	<link rel="stylesheet" type="text/css" href="{% static "css/yonetmen_page.css" %}">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+	<title>{{person.yonetmen_ad}}</title>
+</head>
+<body>
+	<section class="header_section">
+		<div class="header_main_container">
+			<div class="header">
+				<div class="header_left">
+					<div class="menu_bar"><img src="{% static "img/bars-solid.svg" %}"></div>
+					<div class="logo_div">
+						<a href="/index"><img src="{% static "img/moviroma_logo.svg" %}"></a>
+					</div>
+				</div>
+				<div class="header_middle">
+					<div class="searchbox_div">
+						<form method='GET' action={% url 'search' %}>
+							<input type="text" id="fname" name="q" placeholder="Ara">
+							<button class="search_button" value="{{ query|escape }}" type="button"><a href="#"><img src="{% static "img/search-solid.svg" %}"></a></button>
+						</form>
+					</div>
+					<ul>
+						{% for item in searchedperson %}
+							<li><a href="{% url 'directorview' id=item.pk %}" style="color: white;">{{ item.yonetmen_ad }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="header_right">
+					<div class="user_menu">
+						 <div class="dropdown">
+						 	<button class="dropbtn" type="submit" style="border: 0; background: transparent">
+    							<img src="{% static "img/user_default_icon.svg" %}" width="30" height="30" alt="submit" />
+							</button>
+  							<div class="dropdown-content">
+    							<a href="#">Profile</a>
+   								<a href="#">Settings</a>
+    							<a href="/logout">Logout</a>
+  							</div>
+        				</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="content_section">
+		<div style="background-image: url('http://image.tmdb.org/t/p/original{{latestmovie.film_backdrop_linki}}');"class="director_top_main">
+			<div class="director_pp">
+				<img src="http://image.tmdb.org/t/p/original{{person.yonetmen_pp_linki}}">
+			</div>
+			<div class="director_verified">
+				<h5>DIRECTOR</h5>
+			</div>
+			<div class="director_name">
+				<h4>{{person.yonetmen_ad}}</h4>
+			</div>
+			<div class="director_buttons">
+				<form>
+					<button class="button_blue"><a href="#"><img src="{% static "img/add_fav_icon.svg" %}"></a></button>
+					<button class="button_blue"><a href="#"><img src="{% static "img/more_icon.svg" %}"></a></button>
+				</form>
+			</div>
+		</div>
+		<div class="director_submenu">
+			<ul>
+				<li><a class="submenu_selected" href="yonetmen_page.html">Overview</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Fans also like</a></li>
+				<li><a href="#">Vision</a></li>
+			</ul>
+		</div>
+		<div class="director_main_content">
+			<div class="main_content_top_left">
+				<h2>Popular</h2>
+				<div class="director_popular_film_main">
+				</br>
+					{% for item in movies %}
+					<div class="director_popular_film_component">
+						<div class="popular_film_compenent_1"><img src="http://image.tmdb.org/t/p/original{{item.film_poster_linki}}"></div>
+						<div class="popular_film_compenent_2"><h6>{{ forloop.counter }}</h6></div>
+						<div class="popular_film_compenent_3"><a href="#"><img src="{% static "img/add_fav_icon.svg" %}"></a></div>
+						<div class="popular_film_compenent_4"><a href="#">{{item.film_title}}</a></div>
+						<div class="popular_film_compenent_5">{{item.film_tmdb_rating}}</div>
+					</div>
+					{% endfor %}
+					<!-- <div class="director_popular_film_component">
+						<div class="popular_film_compenent_1"><img src="img/popular_film_poster_1.png"></div>
+						<div class="popular_film_compenent_2"><h6>2</h6></div>
+						<div class="popular_film_compenent_3"><a href="#"><img src="img/add_fav_icon.svg"></a></div>
+						<div class="popular_film_compenent_4"><a href="#">Kız Kardeşler</a></div>
+						<div class="popular_film_compenent_5">9.9</div>
+					</div>
+					<div class="director_popular_film_component">
+						<div class="popular_film_compenent_1"><img src="img/popular_film_poster_1.png"></div>
+						<div class="popular_film_compenent_2"><h6>3</h6></div>
+						<div class="popular_film_compenent_3"><a href="#"><img src="img/add_fav_icon.svg"></a></div>
+						<div class="popular_film_compenent_4"><a href="#">Kız Kardeşler</a></div>
+						<div class="popular_film_compenent_5">9.9</div>
+					</div>
+					<div class="director_popular_film_component">
+						<div class="popular_film_compenent_1"><img src="img/popular_film_poster_1.png"></div>
+						<div class="popular_film_compenent_2"><h6>4</h6></div>
+						<div class="popular_film_compenent_3"><a href="#"><img src="img/add_fav_icon.svg"></a></div>
+						<div class="popular_film_compenent_4"><a href="#">Kız Kardeşler</a></div>
+						<div class="popular_film_compenent_5">9.9</div>
+					</div>
+					<div class="director_popular_film_component">
+						<div class="popular_film_compenent_1"><img src="img/popular_film_poster_1.png"></div>
+						<div class="popular_film_compenent_2"><h6>5</h6></div>
+						<div class="popular_film_compenent_3"><a href="#"><img src="img/add_fav_icon.svg"></a></div>
+						<div class="popular_film_compenent_4"><a href="#">Kız Kardeşler</a></div>
+						<div class="popular_film_compenent_5">9.9</div>
+					</div> -->
+				</div>
+				<div class="popular_film_button_div">
+					<form>
+						<button class="popular_film_button"><a href="#">Show more film</a></button>
+					</form>
+				</div>
+			</div>
+			<div class="main_content_top_right">
+				<div class="latest_from_artist">
+					<div class="latest_from_artist_1"><h2>LATEST FROM ARTIST</h2></div>
+					<div class="latest_from_artist_2"><a href="#"><img src="http://image.tmdb.org/t/p/original{{latestmovie.film_poster_linki}}"></a></div>
+					<div class="latest_from_artist_3"><h3>{{latestmovie.film_title}}</h3></div>
+					<div class="latest_from_artist_4"><h4>{{latestmovie.film_yayinlanma_tarihi}}</h4></div>
+				</div>
+			</div>
+			<div class="main_content_bottom">
+				<div class="filmography_main">
+					<h2>Filmography</h2>
+					{% for item in movies %}
+					<div class="filmography_component">
+						<div class="fcomponent_left"><img src="http://image.tmdb.org/t/p/original{{item.film_poster_linki}}"></div>
+						<div class="fcomponent_right">
+							<div class="fcomponent_right_1">{{item.film_title}}</div>
+							<div class="fcomponent_right_2">{{item.film_aciklamasi}}
+							</div>
+							<div class="fcomponent_right_3">
+								<div class="fcomponent_right_bottom_1"><button class="button_blue"><a href="#"><img src="{% static "img/add_fav_icon.svg" %}"></a></button></div>
+								<div class="fcomponent_right_bottom_2"><button class="button_blue"><a href="#"><img src="{% static "img/more_icon.svg" %}"></a></button></div>
+								<div class="fcomponent_right_bottom_3"><button class="button_blue_large">
+									<a href="#">{{item.film_suresi}} minute</a>
+								</button></div>
+								<div class="fcomponent_right_bottom_4"><button class="button_blue_large2">
+									<a href="">Community Rating: {{item.film_tmdb_rating}}</a>
+								</button></div>
+							</div>
+						</div>
+					</div>
+
+
+					{% endfor %}
+					<!-- <div class="filmography_component">
+						<div class="fcomponent_left"><img src="img/filmography_component_poster.png"></div>
+						<div class="fcomponent_right">
+							<div class="fcomponent_right_1">Kız Kardeşler</div>
+							<div class="fcomponent_right_2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim 
+							</div>
+							<div class="fcomponent_right_3">
+								<div class="fcomponent_right_bottom_1"><button class="button_blue"><a href="#"><img src="img/add_fav_icon.svg"></a></button></div>
+								<div class="fcomponent_right_bottom_2"><button class="button_blue"><a href="#"><img src="img/more_icon.svg"></a></button></div>
+								<div class="fcomponent_right_bottom_3"><button class="button_blue_large">
+									<a href="#">94 Minute </a>
+								</button></div>
+								<div class="fcomponent_right_bottom_4"><button class="button_blue_large2">
+									<a href="">Community Rating: 8.2</a>
+								</button></div>
+							</div>
+						</div>
+					</div>
+					<div class="filmography_component">
+						<div class="fcomponent_left"><img src="img/filmography_component_poster.png"></div>
+						<div class="fcomponent_right">
+							<div class="fcomponent_right_1">Kız Kardeşler</div>
+							<div class="fcomponent_right_2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim 
+							</div>
+							<div class="fcomponent_right_3">
+								<div class="fcomponent_right_bottom_1"><button class="button_blue"><a href="#"><img src="img/add_fav_icon.svg"></a></button></div>
+								<div class="fcomponent_right_bottom_2"><button class="button_blue"><a href="#"><img src="img/more_icon.svg"></a></button></div>
+								<div class="fcomponent_right_bottom_3"><button class="button_blue_large">
+									<a href="#">94 Minute </a>
+								</button></div>
+								<div class="fcomponent_right_bottom_4"><button class="button_blue_large2">
+									<a href="">Community Rating: 8.2</a>
+								</button></div>
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+	</section>
+</body>
+</html>

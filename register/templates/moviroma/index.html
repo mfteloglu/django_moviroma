@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="icon" href="{% static "img/favicon.ico" %}" type="image/x-icon" />
+  <title>MOVIROMA</title>
+
+  <link rel="stylesheet" type="text/css" href="{% static "css/style_yonetmen_ana.css" %}">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <form method='GET' action={% url 'search' %} >
+    <input type="text" name="q" placeholder="Search posts"/>
+    <input type="submit" value="{{ query|escape }}"/>
+</form>
+
+<!-- SEARCH SONUÇLARI. TIKLANDIGINDA SEÇİLEN YÖNETMENE GİDİYOR -->
+<ul>
+  {% for item in searchedperson %}
+      <li><a href="{% url 'directorview' id=item.pk %}" style="color: white;">{{ item.yonetmen_ad }}</a></li>
+  {% endfor %}
+</ul>
+  <!-- BURASI LOGOUT KISMI ENDIF E KADAR. STYLE EKLENMELİ -->
+<div class="main">
+  <div class="sol_main">
+    <div class="sol_menu_main">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Browse</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+    </div>
+    <div class="sol_list_library">
+      <ul>
+        <li><a href="#">Last Watched</a></li>
+        <li><a href="#">Your Favourite</a></li>
+        <li><a href="#">Artists</a></li>
+        <li><a href="#">Movies</a></li>
+        <li><a href="#">From Movimora</a></li>        
+      </ul>
+    </div>
+    <div class="sol_list_watchlist">
+        <ul>
+        <li><a href="#">Nuri Bilge Ceylan Boxset</a></li>
+        <li><a href="#">Arthouse</a></li>
+        <li><a href="#">IMDB TOP 250</a></li>
+        <li><a href="#">Rainy Day Movies</a></li>
+        <li><a href="#">Movies That Make You Happy</a></li>
+        <li><a href="#">2000's Best Horror Movies</a></li>
+        <li><a href="#">Hollywood Classics</a></li>
+        <li><a href="#">Western Classics</a></li>         
+      </ul>
+    </div>
+  </div>
+  <div class="orta_main">
+    <div class="orta_top_main">
+      <div class="orta_top_sag_main">
+        <div class="takipciler_main">
+        <p>TAKİPÇİLER
+      </br>
+        31</p>
+      </div>
+      </div>
+      <div class="orta_top_sol_main">
+      <div class="verify_main">
+        <div class="verify_top"></div>
+        <div class="verify_bottom">Verified Artist</div>
+      </div>
+      <div class="artist_name_main"><p>{{person.yonetmen_ad}}</p></div>
+      <div class="buttons_main">
+        <button class="button_follow_green">Follow</button>
+        <button class="button_more_orange">...</button>
+      </div>
+      <div class="menu_main">
+        <ul>
+          <li><a href="#">Overview</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Fan Also Like</a></li>
+          <li><a href="#">Vision</a></li>
+        </ul>
+      </div>
+      </div>
+    </div>
+    <div class="orta_bottom_main">
+      <div class="latest_from_artist_main">
+        <div class="latest_from_artist_top"><h2>Latest from artist</h2></div>
+        <div class="latest_from_artist_bottom">
+          <div class="latest_from_artist_sol_bosluk"></div>
+          <div class="latest_from_artist_left"></div>
+          <div class="latest_from_artist_right">
+            <h2>Kız Kardeşler</h2>
+            <p>17 Jan 2020</p>
+          </div>
+        </div>
+      </div>
+      <div class="message_from_artist_main">
+        <h2>Message from artist</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore atalanta kg. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </br> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore atalanta kg. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+      </div>
+      <div class="popular_film_from_artist_main">
+        <div class="popular_film_title_main">
+          <h2>Popular</h2>
+        </div>
+        <div class="popular_film_bottom">
+          <div class="popular_film_component_frame">
+            <div class="popular_film_component">
+              <div class="film_component_first">
+                <img src="{% static "img/kiz_kardesler_popular.png" %}">
+              </div>
+              <div class="film_component_second">1</div>
+              <div class="film_component_third">Kız Kardeşler</div>
+              <div class="film_component_fourth">55.486</div>
+            </div>
+          <div class="popular_film_component">
+              <div class="film_component_first">
+                <img src="./img/tepenin_ardi_popular.png">
+              </div>
+              <div class="film_component_second">2</div>
+              <div class="film_component_third">Tepenin Ardı</div>
+              <div class="film_component_fourth">36.487</div>
+            </div>
+          <div class="popular_film_component">
+              <div class="film_component_first">
+                <img src="./img/abluka_popular.png">
+              </div>
+              <div class="film_component_second">3</div>
+              <div class="film_component_third">Abluka</div>
+              <div class="film_component_fourth">24.312</div>
+            </div>
+          </div>
+        </div>
+      <div class="filmography_title"><h2>Filmography</h2></div>
+      <div class="filmography_component_from_artist_main">
+        <div class="filmography_component_sol"></div>
+        <div class="filmography_component_orta"><img src="./img/kız_kardesler_filmography.png"></div>
+        <div class="filmography_component_sag"> 
+          <div class="filmography_component_top_main">
+              <div class="filmography_sag_first">
+                <h2>Kız Kardeşler</h2>
+              </div>
+              <div class="filmography_sag_second">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+              </div>
+          </div>
+          <div class="filmography_component_bottom_main">
+              <div class="filmography_sag_third">
+                <button class="button_filmography_white">...</button>
+                <button class="button_filmography_white">...</button>
+              </div>
+              <div class="filmography_sag_fourth">
+                <button class="button_filmography_community_rating">Topluluk Puanı: 8.7</button>
+                <button class="button_filmography_duration">1h 24m</button>
+                <button class="button_filmography_imdb_rating">IMDB Puanı: 8.3</button>
+              </div>
+          </div>
+        </div>
+      </div>
+            <div class="filmography_component_from_artist_main">
+        <div class="filmography_component_sol"></div>
+        <div class="filmography_component_orta"><img src="./img/kız_kardesler_filmography.png"></div>
+        <div class="filmography_component_sag"> 
+          <div class="filmography_component_top_main">
+              <div class="filmography_sag_first">
+                <h2>Kız Kardeşler</h2>
+              </div>
+              <div class="filmography_sag_second">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+              </div>
+          </div>
+          <div class="filmography_component_bottom_main">
+              <div class="filmography_sag_third">
+                <button class="button_filmography_white">...</button>
+                <button class="button_filmography_white">...</button>
+              </div>
+              <div class="filmography_sag_fourth">
+                <button class="button_filmography_community_rating">Topluluk Puanı: 8.7</button>
+                <button class="button_filmography_duration">1h 24m</button>
+                <button class="button_filmography_imdb_rating">IMDB Puanı: 8.3</button>
+              </div>
+          </div>
+        </div>
+      </div>
+            <div class="filmography_component_from_artist_main">
+        <div class="filmography_component_sol"></div>
+        <div class="filmography_component_orta"><img src="./img/kız_kardesler_filmography.png"></div>
+        <div class="filmography_component_sag"> 
+          <div class="filmography_component_top_main">
+              <div class="filmography_sag_first">
+                <h2>Kız Kardeşler</h2>
+              </div>
+              <div class="filmography_sag_second">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+              </div>
+          </div>
+          <div class="filmography_component_bottom_main">
+              <div class="filmography_sag_third">
+                <button class="button_filmography_white">...</button>
+                <button class="button_filmography_white">...</button>
+              </div>
+              <div class="filmography_sag_fourth">
+                <button class="button_filmography_community_rating">Topluluk Puanı: 8.7</button>
+                <button class="button_filmography_duration">1h 24m</button>
+                <button class="button_filmography_imdb_rating">IMDB Puanı: 8.3</button>
+              </div>
+          </div>
+        </div>
+      </div>
+            <div class="filmography_component_from_artist_main">
+        <div class="filmography_component_sol"></div>
+        <div class="filmography_component_orta"><img src="./img/kız_kardesler_filmography.png"></div>
+        <div class="filmography_component_sag"> 
+          <div class="filmography_component_top_main">
+              <div class="filmography_sag_first">
+                <h2>Kız Kardeşler</h2>
+              </div>
+              <div class="filmography_sag_second">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+              </div>
+          </div>
+          <div class="filmography_component_bottom_main">
+              <div class="filmography_sag_third">
+                <button class="button_filmography_white">...</button>
+                <button class="button_filmography_white">...</button>
+              </div>
+              <div class="filmography_sag_fourth">
+                <button class="button_filmography_community_rating">Topluluk Puanı: 8.7</button>
+                <button class="button_filmography_duration">1h 24m</button>
+                <button class="button_filmography_imdb_rating">IMDB Puanı: 8.3</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+<div class="sag_main">
+  {% if user.is_authenticated %}
+  <div class="top-menu-user">
+    <ul>
+      <li>
+        <button class="button_follow_green"><a href="/logout">LOGOUT</a></button>
+      </li>
+      <li>
+        <p><svg style="vertical-align:middle" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" class="svg-inline--fa fa-user fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg> Welcome, {{user.username}}</p>
+      </li>
+    </ul>
+  </div>
+  {% endif %}
+</div>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/jquery-3.5.1.min.js"></script>
+
+</body>
+</html>
