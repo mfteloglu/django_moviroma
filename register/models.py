@@ -24,6 +24,8 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from datetime import datetime as dt
+from django.conf import settings
+#from django.contrib.auth.models import User
 
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
@@ -209,4 +211,9 @@ class YonetmenDetay(models.Model):
     def __str__(self):
         return self.yonetmen_ad
 
+class likedmovies(models.Model):
+    movies = models.TextField(default="")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.movies

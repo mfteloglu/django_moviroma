@@ -28,5 +28,7 @@ urlpatterns = [
     path('logout/', v.logout_view, name="logout"),
     path('directors/<int:id>/', v.director_view,name="directorview"),
     path('search/',v.searchdirector,name="search"),
-    path('searchmovie/',v.searchmovie,name="searchmovie")
+    path('searchmovie/',v.searchmovie,name="searchmovie"),
+    path('directors/<int:id>/<int:id1>/',v.likemovie,name="likemovie"),
+    path('directors/<int:id>/<int:id1>/u',v.unlikemovie,name="unlikemovie")
 ]

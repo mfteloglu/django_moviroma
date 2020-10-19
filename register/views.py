@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .models import YonetmenDetay,FilmDetay
+from .models import YonetmenDetay,FilmDetay,likedmovies
 from django.db.models import Q
 
 # Create your views here.
@@ -52,13 +52,22 @@ def director_view(request,id):
     if not request.user.is_authenticated:
         return render(request,"moviroma/404error.html")
     else:
+        current_user = request.user
+
+        if likedmovies.objects.filter(user=current_user).count() != 0:
+            playlist = likedmovies.objects.filter(user=current_user).first()
+        else:
+            playlist = likedmovies(movies="",user=current_user)
+            playlist.save()
+     
         selecteddirector = YonetmenDetay.objects.filter(yonetmen_tmdb_id=id).first()
         directorsmovies = FilmDetay.objects.filter(yonetmen_id=id).distinct()
         sorteddirectorsmovies = directorsmovies.order_by('-film_tmdb_rating')
 
         directorsmoviesdates = []
         for item in directorsmovies:
-            directorsmoviesdates.append(item.startdate_as_date())
+            if item.film_yayinlanma_tarihi:
+                directorsmoviesdates.append(item.startdate_as_date())
 
         latest = directorsmoviesdates[0]
         for item in directorsmoviesdates:
@@ -66,9 +75,10 @@ def director_view(request,id):
                 latest = item
             
         for item in directorsmovies:
-            if item.startdate_as_date()==latest:
-                latestmovie = item
-        context = {'person': selecteddirector,'movies': sorteddirectorsmovies, 'latestmovie': latestmovie}
+            if item.film_yayinlanma_tarihi:
+                if item.startdate_as_date()==latest:
+                    latestmovie = item
+        context = {'person': selecteddirector,'movies': sorteddirectorsmovies, 'latestmovie': latestmovie, 'likedmovies': playlist.movies}
         return render(request,"moviroma/yonetmen_main_page.html",context)
 
 def searchdirector(request):
@@ -119,4 +129,33 @@ def searchmovie(request):
        numberofresults = 0
        context = {'searchedmovie': results,'numberofsearchedmovie': numberofresultsmovie,'numberofsearchedperson': numberofresultsdirector,'search': query}
     return render(request, "moviroma/searchmovie.html", context)
+
+def likemovie(request,id,id1):
+    if not request.user.is_authenticated:
+        return render(request,"moviroma/404error.html")
+    else:
+        current_user = request.user
+        liked_movie = FilmDetay.objects.filter(film_tmdb_id=id1).first()
+        if likedmovies.objects.filter(user=current_user).count() == 0:
+            likedmovies(user=current_user,movies=liked_movie).save()
+        else:
+            playlist = likedmovies.objects.filter(user=current_user).first()
+            playlist.movies += "," + liked_movie.film_title
+            playlist.save()
+                   
+        return director_view(request,id)
+
+def unlikemovie(request,id,id1):
+    if not request.user.is_authenticated:
+        return render(request,"moviroma/404error.html")
+    else:
+        current_user = request.user
+        unliked_movie = FilmDetay.objects.filter(film_tmdb_id=id1).first()
+
+        playlist = likedmovies.objects.filter(user=current_user).first()
+        playlist.movies = playlist.movies.replace(","+ unliked_movie.film_title,"")
+        playlist.save()
+                   
+        return director_view(request,id)    
+        
 

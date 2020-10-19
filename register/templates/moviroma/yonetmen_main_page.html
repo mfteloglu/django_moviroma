@@ -84,7 +84,11 @@
 					<div class="director_popular_film_component">
 						<div class="popular_film_compenent_1"><img src="http://image.tmdb.org/t/p/original{{item.film_poster_linki}}"></div>
 						<div class="popular_film_compenent_2"><h6>{{ forloop.counter }}</h6></div>
-						<div class="popular_film_compenent_3"><a href="#"><img src="{% static "img/add_fav_icon.svg" %}"></a></div>
+						{% if item.film_title in likedmovies %}
+						<div class="popular_film_compenent_3"><a href="{% url 'unlikemovie' id=person.pk id1=item.film_tmdb_id %}"><img src="{% static "img/like-red.svg" %}"></a></div>
+						{% else %}
+						<div class="popular_film_compenent_3"><a href="{% url 'likemovie' id=person.pk id1=item.film_tmdb_id %}"><img src="{% static "img/add_fav_icon.svg" %}"></a></div>
+						{% endif %}
 						<div class="popular_film_compenent_4"><a href="#">{{item.film_title}}</a></div>
 						<div class="popular_film_compenent_5">{{item.film_tmdb_rating}}</div>
 					</div>
