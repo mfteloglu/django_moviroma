@@ -61,15 +61,17 @@
 				<h4>{{person.yonetmen_ad}}</h4>
 			</div>
 			<div class="director_buttons">
-				<form>
-					<button class="button_blue"><a href="#"><img src="{% static "img/add_fav_icon.svg" %}"></a></button>
-					<button class="button_blue"><a href="#"><img src="{% static "img/more_icon.svg" %}"></a></button>
-				</form>
+					{% if person.yonetmen_ad in likeddirectors %}
+					<button class="button_blue"><a href="/directors/ud/{{person.yonetmen_tmdb_id}}"><img src="{% static "img/like-red.svg" %}"></a></button>
+					{% else %}
+					<button class="button_blue"><a href="/directors/ld/{{person.yonetmen_tmdb_id}}"><img src="{% static "img/add_fav_icon.svg" %}"></a></button>
+					{% endif %}
+					<button class="button_blue"><a href="#"><img src="{% static "img/more_icon.svg" %}"></a></button>		
 			</div>
 		</div>
 		<div class="director_submenu">
 			<ul>
-				<li><a class="submenu_selected" href="yonetmen_page.html">Overview</a></li>
+				<li><a class="submenu_selected" href="#">Overview</a></li>
 				<li><a href="#">About</a></li>
 				<li><a href="#">Fans also like</a></li>
 				<li><a href="#">Vision</a></li>
@@ -89,38 +91,11 @@
 						{% else %}
 						<div class="popular_film_compenent_3"><a href="{% url 'likemovie' id=person.pk id1=item.film_tmdb_id %}"><img src="{% static "img/add_fav_icon.svg" %}"></a></div>
 						{% endif %}
-						<div class="popular_film_compenent_4"><a href="#">{{item.film_title}}</a></div>
+						<div class="popular_film_compenent_4"><a href="{% url 'movieview' id=item.film_tmdb_id %}">{{item.film_title}}</a></div>
 						<div class="popular_film_compenent_5">{{item.film_tmdb_rating}}</div>
 					</div>
 					{% endfor %}
-					<!-- <div class="director_popular_film_component">
-						<div class="popular_film_compenent_1"><img src="img/popular_film_poster_1.png"></div>
-						<div class="popular_film_compenent_2"><h6>2</h6></div>
-						<div class="popular_film_compenent_3"><a href="#"><img src="img/add_fav_icon.svg"></a></div>
-						<div class="popular_film_compenent_4"><a href="#">Kız Kardeşler</a></div>
-						<div class="popular_film_compenent_5">9.9</div>
-					</div>
-					<div class="director_popular_film_component">
-						<div class="popular_film_compenent_1"><img src="img/popular_film_poster_1.png"></div>
-						<div class="popular_film_compenent_2"><h6>3</h6></div>
-						<div class="popular_film_compenent_3"><a href="#"><img src="img/add_fav_icon.svg"></a></div>
-						<div class="popular_film_compenent_4"><a href="#">Kız Kardeşler</a></div>
-						<div class="popular_film_compenent_5">9.9</div>
-					</div>
-					<div class="director_popular_film_component">
-						<div class="popular_film_compenent_1"><img src="img/popular_film_poster_1.png"></div>
-						<div class="popular_film_compenent_2"><h6>4</h6></div>
-						<div class="popular_film_compenent_3"><a href="#"><img src="img/add_fav_icon.svg"></a></div>
-						<div class="popular_film_compenent_4"><a href="#">Kız Kardeşler</a></div>
-						<div class="popular_film_compenent_5">9.9</div>
-					</div>
-					<div class="director_popular_film_component">
-						<div class="popular_film_compenent_1"><img src="img/popular_film_poster_1.png"></div>
-						<div class="popular_film_compenent_2"><h6>5</h6></div>
-						<div class="popular_film_compenent_3"><a href="#"><img src="img/add_fav_icon.svg"></a></div>
-						<div class="popular_film_compenent_4"><a href="#">Kız Kardeşler</a></div>
-						<div class="popular_film_compenent_5">9.9</div>
-					</div> -->
+
 				</div>
 				<div class="popular_film_button_div">
 					<form>
@@ -131,8 +106,8 @@
 			<div class="main_content_top_right">
 				<div class="latest_from_artist">
 					<div class="latest_from_artist_1"><h2>LATEST FROM ARTIST</h2></div>
-					<div class="latest_from_artist_2"><a href="#"><img src="http://image.tmdb.org/t/p/original{{latestmovie.film_poster_linki}}"></a></div>
-					<div class="latest_from_artist_3"><h3>{{latestmovie.film_title}}</h3></div>
+					<div class="latest_from_artist_2"><a href="/movies/{{latestmovie.film_tmdb_id}}"><img src="http://image.tmdb.org/t/p/original{{latestmovie.film_poster_linki}}"></a></div>
+					<div class="latest_from_artist_3"><a href="/movies/{{latestmovie.film_tmdb_id}}"><h3>{{latestmovie.film_title}}</h3></a></div>
 					<div class="latest_from_artist_4"><h4>{{latestmovie.film_yayinlanma_tarihi}}</h4></div>
 				</div>
 			</div>
@@ -141,13 +116,17 @@
 					<h2>Filmography</h2>
 					{% for item in movies %}
 					<div class="filmography_component">
-						<div class="fcomponent_left"><img src="http://image.tmdb.org/t/p/original{{item.film_poster_linki}}"></div>
+						<div class="fcomponent_left"><a href="{% url 'movieview' id=item.film_tmdb_id %}"><img src="http://image.tmdb.org/t/p/original{{item.film_poster_linki}}"></a></div>
 						<div class="fcomponent_right">
-							<div class="fcomponent_right_1">{{item.film_title}}</div>
+							<div class="fcomponent_right_1"><a href="{% url 'movieview' id=item.film_tmdb_id %}">{{item.film_title}}</a></div>
 							<div class="fcomponent_right_2">{{item.film_aciklamasi}}
 							</div>
 							<div class="fcomponent_right_3">
-								<div class="fcomponent_right_bottom_1"><button class="button_blue"><a href="#"><img src="{% static "img/add_fav_icon.svg" %}"></a></button></div>
+								{% if item.film_title in likedmovies %}
+								<div class="fcomponent_right_bottom_1"><button class="button_blue"><a href="{% url 'unlikemovie' id=person.pk id1=item.film_tmdb_id %}"><img src="{% static "img/like-red.svg" %}"></a></button></div>
+								{% else %}
+								<div class="fcomponent_right_bottom_1"><button class="button_blue"><a href="{% url 'likemovie' id=person.pk id1=item.film_tmdb_id %}"><img src="{% static "img/add_fav_icon.svg" %}"></a></button></div>
+								{% endif %}
 								<div class="fcomponent_right_bottom_2"><button class="button_blue"><a href="#"><img src="{% static "img/more_icon.svg" %}"></a></button></div>
 								<div class="fcomponent_right_bottom_3"><button class="button_blue_large">
 									<a href="#">{{item.film_suresi}} minute</a>
@@ -158,47 +137,7 @@
 							</div>
 						</div>
 					</div>
-
-
 					{% endfor %}
-					<!-- <div class="filmography_component">
-						<div class="fcomponent_left"><img src="img/filmography_component_poster.png"></div>
-						<div class="fcomponent_right">
-							<div class="fcomponent_right_1">Kız Kardeşler</div>
-							<div class="fcomponent_right_2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim 
-							</div>
-							<div class="fcomponent_right_3">
-								<div class="fcomponent_right_bottom_1"><button class="button_blue"><a href="#"><img src="img/add_fav_icon.svg"></a></button></div>
-								<div class="fcomponent_right_bottom_2"><button class="button_blue"><a href="#"><img src="img/more_icon.svg"></a></button></div>
-								<div class="fcomponent_right_bottom_3"><button class="button_blue_large">
-									<a href="#">94 Minute </a>
-								</button></div>
-								<div class="fcomponent_right_bottom_4"><button class="button_blue_large2">
-									<a href="">Community Rating: 8.2</a>
-								</button></div>
-							</div>
-						</div>
-					</div>
-					<div class="filmography_component">
-						<div class="fcomponent_left"><img src="img/filmography_component_poster.png"></div>
-						<div class="fcomponent_right">
-							<div class="fcomponent_right_1">Kız Kardeşler</div>
-							<div class="fcomponent_right_2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim 
-							</div>
-							<div class="fcomponent_right_3">
-								<div class="fcomponent_right_bottom_1"><button class="button_blue"><a href="#"><img src="img/add_fav_icon.svg"></a></button></div>
-								<div class="fcomponent_right_bottom_2"><button class="button_blue"><a href="#"><img src="img/more_icon.svg"></a></button></div>
-								<div class="fcomponent_right_bottom_3"><button class="button_blue_large">
-									<a href="#">94 Minute </a>
-								</button></div>
-								<div class="fcomponent_right_bottom_4"><button class="button_blue_large2">
-									<a href="">Community Rating: 8.2</a>
-								</button></div>
-							</div>
-						</div>
-					</div> -->
 				</div>
 			</div>
 	</section>

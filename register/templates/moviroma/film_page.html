@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="{% static "css/yonetmen_page.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "css/film_page.css" %}">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<style>.mySlides {display:none;}</style>
+	<title>Film Sayfası</title>
+</head>
+<body>
+	<section class="header_section">
+		<div class="header_main_container">
+			<div class="header">
+				<div class="header_left">
+					<div class="menu_bar"><img src="{% static "img/bars-solid.svg" %}"></div>
+					<div class="logo_div">
+						<a href="/index"><img src="{% static "img/moviroma_logo.svg" %}"></a>
+					</div>
+				</div>
+				<div class="header_middle">
+					<div class="searchbox_div">
+						<form method='GET' action={% url 'search' %}>
+							<input type="text" id="fname" name="q" placeholder="Ara">
+							<button class="search_button" value="{{ query|escape }}" type="button"><a href="#"><img src="{% static "img/search-solid.svg" %}"></a></button>
+						</form>
+					</div>
+				</div>
+				<div class="header_right">
+					<div class="user_menu">
+						 <div class="dropdown">
+						 	<button class="dropbtn" type="submit" style="border: 0; background: transparent">
+    							<img src="{% static "img/user_default_icon.svg" %}" width="30" height="30" alt="submit" />
+							</button>
+  							<div class="dropdown-content">
+    							<a href="#">Profile</a>
+   								<a href="#">Settings</a>
+    							<a href="/logout">Logout</a>
+  							</div>
+        				</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="content_section">
+		<div style="background-image: url('http://image.tmdb.org/t/p/original{{movie.film_backdrop_linki}}');"class="director_top_main">
+			<div class="director_pp">
+				<h2>{{movie.film_title}}</h2>
+			</div>
+			<div class="director_verified">
+				<h5>from</h5>
+			</div>
+			<div class="director_name">
+				<h4><a href="{% url 'directorview' id=director.pk %}">{{director.yonetmen_ad}}</a></h4>
+			</div>
+			<div class="director_verified2">
+				<h5>MOVIE</h5>
+			</div>
+			<div class="director_buttons">
+					{% if movie.film_title in likedmovies %}
+					<button class="button_blue"><a href="{% url 'unlikemovie' id=director.pk id1=movie.film_tmdb_id %}"><img src="{% static "img/like-red.svg" %}"></a></button>
+					{% else %}
+					<button class="button_blue"><a href="{% url 'likemovie' id=director.pk id1=movie.film_tmdb_id %}"><img src="{% static "img/add_fav_icon.svg" %}"></a></button>
+					{% endif %}
+					<button class="button_blue"><a href="#"><img src="{% static "img/more_icon.svg" %}"></a></button>
+				
+			</div>
+		</div>
+		<div class="director_main_content_film">
+			<div class="film_page_components">
+				<div class="film_component_film">
+					<div class="film_component_div">
+					<div class="filmography_component_film">
+						<div class="fcomponent_left_film"><img src="http://image.tmdb.org/t/p/original{{movie.film_poster_linki}}"></div>
+						<div class="fcomponent_right_film">
+							<div class="fcomponent_right_1_film">{{movie.film_title}}</div>
+							<div class="fcomponent_right_2_film">{{movie.film_aciklamasi}}
+							</div>
+							<div class="fcomponent_right_3_film">
+								{% if movie.film_title in likedmovies %}
+								<div class="fcomponent_right_bottom_1_film"><button class="button_blue"><a href="{% url 'unlikemovie' id=director.pk id1=movie.film_tmdb_id %}"><img src="{% static "img/like-red.svg" %}"></a></button></div>
+								{% else %}
+								<div class="fcomponent_right_bottom_1_film"><button class="button_blue"><a href="{% url 'likemovie' id=director.pk id1=movie.film_tmdb_id %}"><img src="{% static "img/add_fav_icon.svg" %}"></a></button></div>
+								{% endif %}
+								<div class="fcomponent_right_bottom_2_film"><button class="button_blue"><a href="#"><img src="{% static "img/more_icon.svg" %}"></a></button></div>
+								
+								<div class="fcomponent_right_bottom_3_film"><button class="button_blue_large">
+									<a href="#">{{movie.film_suresi}} min </a>
+								</button></div>
+								<div class="fcomponent_right_bottom_4_film"><button class="button_blue_large2">
+									<a href="">Community Rating: {{movie.film_tmdb_rating}}</a>
+								</button></div>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+				<div class="video_gallery_film">
+					<div class="video_gallery_film_div"><iframe width="450" height="350" src="https://www.youtube.com/embed/{{trailer}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+				</div>
+				<div class="photo_gallery_film">
+					<div class="photo_gallery_film_div">
+						{% for item in images %}
+  							<img class="mySlides" src="http://image.tmdb.org/t/p/original{{item}}">
+						{% endfor %}
+					</div>
+				</div>
+				<div class="film_similar_film">
+					<div class="film_similar_div">
+						<h2>Similar Movies</h2>
+						<div class="similar_movie_div">
+							{% for item in similars %}
+							<a href="/movies/{{item.film_tmdb_id}}"><img src="http://image.tmdb.org/t/p/original{{item.film_poster_linki}}"></a>
+							{% endfor %}
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+	</section>
+<script>
+	var myIndex = 0;
+	carousel();
+
+	function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 4000); // Change image every 2 seconds
+	}
+</script>
+</body>
+</html>

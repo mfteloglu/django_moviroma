@@ -27,8 +27,11 @@ urlpatterns = [
     path('index/', v.index,name="index"),
     path('logout/', v.logout_view, name="logout"),
     path('directors/<int:id>/', v.director_view,name="directorview"),
+    path('movies/<int:id>/', v.movie_view ,name="movieview"),
     path('search/',v.searchdirector,name="search"),
     path('searchmovie/',v.searchmovie,name="searchmovie"),
-    path('directors/<int:id>/<int:id1>/',v.likemovie,name="likemovie"),
-    path('directors/<int:id>/<int:id1>/u',v.unlikemovie,name="unlikemovie")
+    path('directors/<int:id>/<int:id1>/lm',v.likemovie,name="likemovie"),
+    path('directors/<int:id>/<int:id1>/um',v.unlikemovie,name="unlikemovie"),
+    path('directors/ld/<int:id>',v.likedirector,name="likedirector"),
+    path('directors/ud/<int:id>',v.unlikedirector,name="unlikedirector")
 ]

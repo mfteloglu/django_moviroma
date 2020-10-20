@@ -63,7 +63,7 @@
 				<div class="searched_content_component">
 					<span class="searched_content_component_left"><img src="http://image.tmdb.org/t/p/original{{item.film_poster_linki}}"></span>
 					<span class="searched_content_component_right">
-						<span class="right_1">{{item.film_title}}</span>
+						<span class="right_1"><a href="{% url 'movieview' id=item.film_tmdb_id %}">{{item.film_title}}</a></span>
 						<span class="right_2">{{item.film_turu}}</span>
 					</span>
 				</div>

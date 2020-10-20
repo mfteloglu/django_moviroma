@@ -150,6 +150,10 @@ class FilmDetay(models.Model):
     film_yayinlanma_tarihi = models.TextField()
     film_suresi = models.TextField()
     film_tmdb_rating = models.TextField()
+    similar_movie_id = models.TextField()
+    film_video_link = models.TextField()
+    recomendation_movie_id = models.TextField()
+    movie_images_link = models.TextField()
 
     class Meta:
         managed = False
@@ -217,3 +221,10 @@ class likedmovies(models.Model):
 
     def __str__(self):
         return self.movies
+
+class likeddirectors(models.Model):
+    directors = models.TextField(default="")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.directors

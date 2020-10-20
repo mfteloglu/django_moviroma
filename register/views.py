@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .models import YonetmenDetay,FilmDetay,likedmovies
+from .models import YonetmenDetay,FilmDetay,likedmovies,likeddirectors
 from django.db.models import Q
 
 # Create your views here.
@@ -14,8 +14,6 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-
-
         return redirect("/login")
     else:
         form = RegisterForm()
@@ -59,6 +57,12 @@ def director_view(request,id):
         else:
             playlist = likedmovies(movies="",user=current_user)
             playlist.save()
+
+        if likeddirectors.objects.filter(user=current_user).count() != 0:
+            playlist1 = likeddirectors.objects.filter(user=current_user).first()
+        else:
+            playlist1 = likeddirectors(directors="",user=current_user)
+            playlist1.save()
      
         selecteddirector = YonetmenDetay.objects.filter(yonetmen_tmdb_id=id).first()
         directorsmovies = FilmDetay.objects.filter(yonetmen_id=id).distinct()
@@ -78,8 +82,36 @@ def director_view(request,id):
             if item.film_yayinlanma_tarihi:
                 if item.startdate_as_date()==latest:
                     latestmovie = item
-        context = {'person': selecteddirector,'movies': sorteddirectorsmovies, 'latestmovie': latestmovie, 'likedmovies': playlist.movies}
+        context = {'person': selecteddirector,'movies': sorteddirectorsmovies, 'latestmovie': latestmovie, 'likedmovies': playlist.movies, 'likeddirectors': playlist1.directors}
         return render(request,"moviroma/yonetmen_main_page.html",context)
+
+def movie_view(request,id):
+    if not request.user.is_authenticated:
+        return render(request,"moviroma/404error.html")
+    else:
+        current_user = request.user
+
+        if likedmovies.objects.filter(user=current_user).count() != 0:
+            playlist = likedmovies.objects.filter(user=current_user).first()
+        else:
+            playlist = likedmovies(movies="",user=current_user)
+            playlist.save()        
+
+        selected_movie = FilmDetay.objects.filter(film_tmdb_id=id).first()
+        movies_director = YonetmenDetay.objects.filter(yonetmen_tmdb_id=selected_movie.yonetmen_id).first()
+        selected_movie_trailers = selected_movie.film_video_link.split(',') 
+        selected_movie_images = selected_movie.movie_images_link.split(',')
+        selected_movie_similars_id = selected_movie.recomendation_movie_id.split(',')
+
+        selected_movie_similars = []
+        for item in selected_movie_similars_id:
+            selected_movie_similars.append(FilmDetay.objects.filter(film_tmdb_id=item).first())
+
+        context = {'movie': selected_movie, 'director': movies_director, 'trailer': selected_movie_trailers[0], 'images': selected_movie_images, 'similars': selected_movie_similars[:5], 'likedmovies': playlist.movies}
+        return render(request,"moviroma/film_page.html",context)
+
+
+
 
 def searchdirector(request):
     query = request.GET.get('q','')
@@ -157,5 +189,34 @@ def unlikemovie(request,id,id1):
         playlist.save()
                    
         return director_view(request,id)    
+
+
+def likedirector(request,id):
+    if not request.user.is_authenticated:
+        return render(request,"moviroma/404error.html")
+    else:
+        current_user = request.user
+        liked_director = YonetmenDetay.objects.filter(yonetmen_tmdb_id=id).first()
+        if likeddirectors.objects.filter(user=current_user).count() == 0:
+            likeddirectors(user=current_user,directors=liked_director).save()
+        else:
+            playlist = likeddirectors.objects.filter(user=current_user).first()
+            playlist.directors += "," + liked_director.yonetmen_ad
+            playlist.save()
+                   
+        return director_view(request,id)
+
+def unlikedirector(request,id):
+    if not request.user.is_authenticated:
+        return render(request,"moviroma/404error.html")
+    else:
+        current_user = request.user
+        unliked_director = YonetmenDetay.objects.filter(yonetmen_tmdb_id=id).first()
+
+        playlist = likeddirectors.objects.filter(user=current_user).first()
+        playlist.directors = playlist.directors.replace(","+ unliked_director.yonetmen_ad,"")
+        playlist.save()
+                   
+        return director_view(request,id)  
         
 
