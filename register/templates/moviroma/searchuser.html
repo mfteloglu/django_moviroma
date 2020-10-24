@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static "css/search_page.css" %}">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-	<title>YONETMEN SAYFASI</title>
+	<title>USER SAYFASI</title>
 </head>
 <body>
 	<section class="header_section">
@@ -54,17 +54,17 @@
 				<span class="search_result_box_bottom">
 					<div class="search_result_type">
 						<span class="search_result_type_1"><img src="{% static "img/director_icon.svg" %}"></span>
-						<span class="search_result_type_2"><a href="/search/?q={{search}}">Director</a></span>
+						<span class="search_result_type_2"><a href="#">Director</a></span>
 						<span class="search_result_type_3"><img src="{% static "img/search_number_circle.svg" %}" alt="Snow" style="width:30px; height:30px;"><div class="centered">{{numberofsearchedperson}}</div>
 						</span>
 					</div>
 					<div class="search_result_type">
 						<span class="search_result_type_1"><img src="{% static "img/film_icon.svg" %}"></span>
-						<span class="search_result_type_2"><a href="#">Movie</a></span>
+						<span class="search_result_type_2"><a href="/searchmovie/?q={{search}}">Movie</a></span>
 						<span class="search_result_type_3"><img src="{% static "img/search_number_circle.svg" %}" alt="Snow" style="width:30px; height:30px;"><div class="centered">{{numberofsearchedmovie}}</div>
 						</span>
-					</div>
-					<div class="search_result_type">
+                    </div>
+                    <div class="search_result_type">
 						<span class="search_result_type_1"><img src="{% static "img/director_icon.svg" %}"></span>
 						<span class="search_result_type_2"><a href="/searchuser/?q={{search}}">User</a></span>
 						<span class="search_result_type_3"><img src="{% static "img/search_number_circle.svg" %}" alt="Snow" style="width:30px; height:30px;"><div class="centered">{{numberofsearcheduser}}</div>
@@ -75,12 +75,12 @@
 		</div>
 		<div class="search_right">
 			<div class="searched_content">
-				{% for item in searchedmovie %}
-				<div class="searched_content_component">
-					<span class="searched_content_component_left"><img src="http://image.tmdb.org/t/p/original{{item.film_poster_linki}}"></span>
+				{% for item in searcheduser %}
+				<div class="searched_content_component" name="searched_directors">
+					<span class="searched_content_component_left"><img src="{% static "img/user_default_icon.svg" %}"></span>
 					<span class="searched_content_component_right">
-						<span class="right_1"><a href="{% url 'movieview' id=item.film_tmdb_id %}">{{item.film_title}}</a></span>
-						<span class="right_2">{{item.film_turu}}</span>
+						<span class="right_1"><a href="{% url 'userview' id=item.id %}" >{{item.username}}</a></span>
+						<span class="right_2">User</span>
 					</span>
 				</div>
 				{% endfor %}

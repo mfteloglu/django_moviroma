@@ -5,10 +5,12 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .models import YonetmenDetay,FilmDetay,likedmovies,likeddirectors
+from .models import YonetmenDetay,FilmDetay,likedmovies,likeddirectors,AuthUser
 from django.db.models import Q
+from django.contrib.auth.models import User
 
 # Create your views here.
+
 def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -51,6 +53,7 @@ def director_view(request,id):
         return render(request,"moviroma/404error.html")
     else:
         current_user = request.user
+        current_user_1 = AuthUser.objects.filter(username=current_user.username).first()
 
         if likedmovies.objects.filter(user=current_user).count() != 0:
             playlist = likedmovies.objects.filter(user=current_user).first()
@@ -82,7 +85,7 @@ def director_view(request,id):
             if item.film_yayinlanma_tarihi:
                 if item.startdate_as_date()==latest:
                     latestmovie = item
-        context = {'person': selecteddirector,'movies': sorteddirectorsmovies, 'latestmovie': latestmovie, 'likedmovies': playlist.movies, 'likeddirectors': playlist1.directors}
+        context = {'person': selecteddirector,'movies': sorteddirectorsmovies, 'latestmovie': latestmovie, 'likedmovies': playlist.movies, 'likeddirectors': playlist1.directors,'currentuser': current_user_1}
         return render(request,"moviroma/yonetmen_main_page.html",context)
 
 def movie_view(request,id):
@@ -90,7 +93,7 @@ def movie_view(request,id):
         return render(request,"moviroma/404error.html")
     else:
         current_user = request.user
-
+        current_user_1 = AuthUser.objects.filter(username=current_user.username).first()
         if likedmovies.objects.filter(user=current_user).count() != 0:
             playlist = likedmovies.objects.filter(user=current_user).first()
         else:
@@ -105,10 +108,48 @@ def movie_view(request,id):
 
         selected_movie_similars = []
         for item in selected_movie_similars_id:
-            selected_movie_similars.append(FilmDetay.objects.filter(film_tmdb_id=item).first())
+            if FilmDetay.objects.filter(film_tmdb_id=item).first():
+                selected_movie_similars.append(FilmDetay.objects.filter(film_tmdb_id=item).first())
 
-        context = {'movie': selected_movie, 'director': movies_director, 'trailer': selected_movie_trailers[0], 'images': selected_movie_images, 'similars': selected_movie_similars[:5], 'likedmovies': playlist.movies}
+        context = {'movie': selected_movie, 'director': movies_director, 'trailer': selected_movie_trailers[0], 'images': selected_movie_images, 'similars': selected_movie_similars[:5], 'likedmovies': playlist.movies,'currentuser': current_user_1}
         return render(request,"moviroma/film_page.html",context)
+
+def user_view(request,id):
+    if not request.user.is_authenticated:
+        return render(request,"moviroma/404error.html")
+    else:
+        current_user = request.user
+        current_user_1 = AuthUser.objects.filter(username=current_user.username).first()
+
+        if likedmovies.objects.filter(user=current_user).count() != 0:
+            playlist = likedmovies.objects.filter(user=current_user).first()
+        else:
+            playlist = likedmovies(movies="",user=current_user)
+            playlist.save()
+
+        if likeddirectors.objects.filter(user=current_user).count() != 0:
+            playlist1 = likeddirectors.objects.filter(user=current_user).first()
+        else:
+            playlist1 = likeddirectors(directors="",user=current_user)
+            playlist1.save()
+     
+        selected_person = AuthUser.objects.filter(id=id).first()
+        selected_person_liked_movies = likedmovies.objects.filter(user=User.objects.filter(username=selected_person.username).first()).first()
+        selected_person_liked_movies_1 = selected_person_liked_movies.movies.split(',')
+        selected_person_liked_movies_2 =[]
+        for item in selected_person_liked_movies_1:
+            if FilmDetay.objects.filter(film_title=item).first():
+                selected_person_liked_movies_2.append(FilmDetay.objects.filter(film_title=item).first())
+
+        selected_person_liked_directors = likeddirectors.objects.filter(user=User.objects.filter(username=selected_person.username).first()).first()
+        selected_person_liked_directors_1 = selected_person_liked_directors.directors.split(',')
+        selected_person_liked_directors_2 =[]
+        for item in selected_person_liked_directors_1:
+            if YonetmenDetay.objects.filter(yonetmen_ad=item).first():
+                selected_person_liked_directors_2.append(YonetmenDetay.objects.filter(yonetmen_ad=item).first())
+
+        context = {'person': selected_person,'likedmovies': playlist.movies, 'likeddirectors': playlist1.directors,'selectedpersonlikedmovies': selected_person_liked_movies_2,'selectedpersonlikeddirectors': selected_person_liked_directors_2,'currentuser': current_user_1}
+        return render(request,"moviroma/user_page.html",context)
 
 
 
@@ -119,17 +160,21 @@ def searchdirector(request):
     if query:
             queryset1 = (Q(yonetmen_ad__icontains=query))
             queryset2 = (Q(film_title__icontains=query))
+            queryset3 = (Q(username__icontains=query))
+
+            current_user = request.user
+            current_user_1 = AuthUser.objects.filter(username=current_user.username).first()
             #I assume "text" is a field in your model
             #i.e., text = model.TextField()
             #Use | if searching multiple fields, i.e., 
             #queryset = (Q(text__icontains=query))|(Q(other__icontains=query))
             #results = director.objects.filter(queryset).distinct()
             results = YonetmenDetay.objects.filter(queryset1).distinct()
-            numberofresultsdirector = YonetmenDetay.objects.filter(queryset1).distinct().count()
-
+            numberofresultsdirector = YonetmenDetay.objects.filter(queryset1).distinct().count()            
             numberofresultsmovie = FilmDetay.objects.filter(queryset2).distinct().count()
+            numberofresultsuser = AuthUser.objects.filter(queryset3).distinct().count()
 
-            context = {'searchedperson': results,'numberofsearchedperson': numberofresultsdirector,'numberofsearchedmovie': numberofresultsmovie,'search': query}
+            context = {'searchedperson': results,'numberofsearcheduser': numberofresultsuser, 'numberofsearchedperson': numberofresultsdirector,'numberofsearchedmovie': numberofresultsmovie,'search': query,'currentuser': current_user_1}
     else:
        results= []
        numberofresults = 0
@@ -138,13 +183,46 @@ def searchdirector(request):
        context = {'searchedperson': results,'numberofsearchedperson': numberofresultsdirector,'numberofsearchedmovie': numberofresultsmovie,'search': query}
     return render(request, "moviroma/searchdirector.html", context)
 
+
+def searchuser(request):
+    query = request.GET.get('q','')
+    #The empty string handles an empty "request"
+    if query:
+            queryset1 = (Q(yonetmen_ad__icontains=query))
+            queryset2 = (Q(film_title__icontains=query))
+            queryset3 = (Q(username__icontains=query))
+
+            current_user = request.user
+            current_user_1 = AuthUser.objects.filter(username=current_user.username).first()
+            #I assume "text" is a field in your model
+            #i.e., text = model.TextField()
+            #Use | if searching multiple fields, i.e., 
+            #queryset = (Q(text__icontains=query))|(Q(other__icontains=query))
+            #results = director.objects.filter(queryset).distinct()
+            results = AuthUser.objects.filter(queryset3).distinct()
+            numberofresultsdirector = YonetmenDetay.objects.filter(queryset1).distinct().count()
+            numberofresultsmovie = FilmDetay.objects.filter(queryset2).distinct().count()
+            numberofresultsuser = AuthUser.objects.filter(queryset3).distinct().count()
+
+            context = {'searcheduser': results,'numberofsearcheduser': numberofresultsuser,'numberofsearchedperson': numberofresultsdirector,'numberofsearchedmovie': numberofresultsmovie,'search': query,'currentuser': current_user_1}
+    else:
+       results= []
+       numberofresults = 0
+       numberofresultsmovie = 0
+
+       context = {'searchedperson': results,'numberofsearchedperson': numberofresultsdirector,'numberofsearchedmovie': numberofresultsmovie,'search': query}
+    return render(request, "moviroma/searchuser.html", context)
+
 def searchmovie(request):
     query = request.GET.get('q','')
     #The empty string handles an empty "request"
     if query:
             queryset1 = (Q(yonetmen_ad__icontains=query))
             queryset2 = (Q(film_title__icontains=query))
-            
+            queryset3 = (Q(username__icontains=query))
+
+            current_user = request.user
+            current_user_1 = AuthUser.objects.filter(username=current_user.username).first()            
             #I assume "text" is a field in your model
             #i.e., text = model.TextField()
             #Use | if searching multiple fields, i.e., 
@@ -152,10 +230,10 @@ def searchmovie(request):
             #results = director.objects.filter(queryset).distinct()
             results = FilmDetay.objects.filter(queryset2).distinct()
             numberofresultsmovie = FilmDetay.objects.filter(queryset2).distinct().count()
-
             numberofresultsdirector = YonetmenDetay.objects.filter(queryset1).distinct().count()
+            numberofresultsuser = AuthUser.objects.filter(queryset3).distinct().count()
 
-            context = {'searchedmovie': results,'numberofsearchedmovie': numberofresultsmovie,'numberofsearchedperson': numberofresultsdirector,'search': query}
+            context = {'searchedmovie': results,'numberofsearcheduser': numberofresultsuser,'numberofsearchedmovie': numberofresultsmovie,'numberofsearchedperson': numberofresultsdirector,'search': query,'currentuser': current_user_1}
     else:
        results = []
        numberofresults = 0
@@ -175,7 +253,8 @@ def likemovie(request,id,id1):
             playlist.movies += "," + liked_movie.film_title
             playlist.save()
                    
-        return director_view(request,id)
+        #return director_view(request,id)
+        return redirect(request.META['HTTP_REFERER'])
 
 def unlikemovie(request,id,id1):
     if not request.user.is_authenticated:
@@ -188,7 +267,9 @@ def unlikemovie(request,id,id1):
         playlist.movies = playlist.movies.replace(","+ unliked_movie.film_title,"")
         playlist.save()
                    
-        return director_view(request,id)    
+        #return director_view(request,id)  
+        return redirect(request.META['HTTP_REFERER'])
+          
 
 
 def likedirector(request,id):
@@ -204,7 +285,8 @@ def likedirector(request,id):
             playlist.directors += "," + liked_director.yonetmen_ad
             playlist.save()
                    
-        return director_view(request,id)
+        #return director_view(request,id)
+        return redirect(request.META['HTTP_REFERER'])
 
 def unlikedirector(request,id):
     if not request.user.is_authenticated:
@@ -217,6 +299,7 @@ def unlikedirector(request,id):
         playlist.directors = playlist.directors.replace(","+ unliked_director.yonetmen_ad,"")
         playlist.save()
                    
-        return director_view(request,id)  
+        #return director_view(request,id)  
+        return redirect(request.META['HTTP_REFERER'])
         
 
