@@ -225,6 +225,17 @@ input[type=text] {
 
 .button_blue{
 	background: #1D3557;
+	width: 90px;
+	height: 35px;
+	border-radius: 35px;
+	border: 3px solid #F1FAEE;
+	box-sizing: border-box;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+.button_blue_1{
+	background: #1D3557;
 	width: 35px;
 	height: 35px;
 	border-radius: 35px;
@@ -234,11 +245,14 @@ input[type=text] {
 	margin-right: 5px;
 	margin-bottom: 5px;
 }
-.button_blue a img{
-  	position:absolute;
-  	-webkit-transform: translate(-50%, -50%);
+.button_blue a p{
+	color:white;
+	text-align: center;
+	margin: auto;
+  	/* -webkit-transform: translate(-50%, -50%);
   	-ms-transform: translate(-50%, -50%);
-  	transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%); */
+
 }
 
 

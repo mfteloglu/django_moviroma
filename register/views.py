@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .models import YonetmenDetay,FilmDetay,likedmovies,likeddirectors,AuthUser
+from .models import YonetmenDetay,FilmDetay,likedmovies,likeddirectors,AuthUser,Followers
 from django.db.models import Q
 from django.contrib.auth.models import User
 
@@ -132,6 +132,12 @@ def user_view(request,id):
         else:
             playlist1 = likeddirectors(directors="",user=current_user)
             playlist1.save()
+
+        if Followers.objects.filter(user=current_user).count() != 0:
+            playlist2 = Followers.objects.filter(user=current_user).first()
+        else:
+            playlist2 = Followers(followed="",user=current_user)
+            playlist2.save()
      
         selected_person = AuthUser.objects.filter(id=id).first()
         selected_person_liked_movies = likedmovies.objects.filter(user=User.objects.filter(username=selected_person.username).first()).first()
@@ -148,11 +154,8 @@ def user_view(request,id):
             if YonetmenDetay.objects.filter(yonetmen_ad=item).first():
                 selected_person_liked_directors_2.append(YonetmenDetay.objects.filter(yonetmen_ad=item).first())
 
-        context = {'person': selected_person,'likedmovies': playlist.movies, 'likeddirectors': playlist1.directors,'selectedpersonlikedmovies': selected_person_liked_movies_2,'selectedpersonlikeddirectors': selected_person_liked_directors_2,'currentuser': current_user_1}
+        context = {'person': selected_person,'likedmovies': playlist.movies, 'likeddirectors': playlist1.directors,'selectedpersonlikedmovies': selected_person_liked_movies_2,'selectedpersonlikeddirectors': selected_person_liked_directors_2,'selectedpersonfollowedusers': playlist2.followed,'currentuser': current_user_1}
         return render(request,"moviroma/user_page.html",context)
-
-
-
 
 def searchdirector(request):
     query = request.GET.get('q','')
@@ -182,7 +185,6 @@ def searchdirector(request):
 
        context = {'searchedperson': results,'numberofsearchedperson': numberofresultsdirector,'numberofsearchedmovie': numberofresultsmovie,'search': query}
     return render(request, "moviroma/searchdirector.html", context)
-
 
 def searchuser(request):
     query = request.GET.get('q','')
@@ -302,4 +304,32 @@ def unlikedirector(request,id):
         #return director_view(request,id)  
         return redirect(request.META['HTTP_REFERER'])
         
+def follow_user(request,id):
+    if not request.user.is_authenticated:
+        return render(request,"moviroma/404error.html")
+    else:
+        current_user = request.user
+        liked_user = AuthUser.objects.filter(id=id).first()
+        if Followers.objects.filter(user=current_user).count() == 0:
+            Followers(user=current_user,directors=liked_user.username).save()
+        else:
+            followlist = Followers.objects.filter(user=current_user).first()
+            followlist.followed += "," + liked_user.username
+            followlist.save()
+                   
+        #return director_view(request,id)
+        return redirect(request.META['HTTP_REFERER'])
 
+def unfollow_user(request,id):
+    if not request.user.is_authenticated:
+        return render(request,"moviroma/404error.html")
+    else:
+        current_user = request.user
+        unliked_user = AuthUser.objects.filter(id=id).first()
+
+        followlist = Followers.objects.filter(user=current_user).first()
+        followlist.followed = followlist.followed.replace(","+ unliked_user.username,"")
+        followlist.save()
+                   
+        #return director_view(request,id)  
+        return redirect(request.META['HTTP_REFERER'])

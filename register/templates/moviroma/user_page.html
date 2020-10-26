@@ -60,14 +60,14 @@
 			<div class="director_name">
 				<h4>{{person.username}}</h4>
 			</div>
-			<!-- <div class="director_buttons">
-					{% if person.yonetmen_ad in likeddirectors %}
-					<button class="button_blue"><a href="/directors/ud/{{person.yonetmen_tmdb_id}}"><img src="{% static "img/like-red.svg" %}"></a></button>
+			<div class="director_buttons">
+					{% if person.username in selectedpersonfollowedusers %}
+					<button class="button_blue"><a href="/users/uu/{{person.id}}"><p>UNFOLLOW</p></a></button>
 					{% else %}
-					<button class="button_blue"><a href="/directors/ld/{{person.yonetmen_tmdb_id}}"><img src="{% static "img/add_fav_icon.svg" %}"></a></button>
+					<button class="button_blue"><a href="/users/fu/{{person.id}}"><p>FOLLOW</p></a></button>
 					{% endif %}
-					<button class="button_blue"><a href="#"><img src="{% static "img/more_icon.svg" %}"></a></button>		
-			</div> -->
+					<button class="button_blue_1"><a href="#"><img src="{% static "img/more_icon.svg" %}"></a></button>		
+			</div>
 		</div>
 		<div class="director_submenu">
 			<ul>

@@ -36,5 +36,7 @@ urlpatterns = [
     path('directors/<int:id>/<int:id1>/lm',v.likemovie,name="likemovie"),
     path('directors/<int:id>/<int:id1>/um',v.unlikemovie,name="unlikemovie"),
     path('directors/ld/<int:id>',v.likedirector,name="likedirector"),
-    path('directors/ud/<int:id>',v.unlikedirector,name="unlikedirector")
+    path('directors/ud/<int:id>',v.unlikedirector,name="unlikedirector"),
+    path('users/fu/<int:id>',v.follow_user,name="followuser"),
+    path('users/uu/<int:id>',v.unfollow_user,name="unfollowuser")
 ]
