@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="{% static "css/yonetmen_page.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "css/film_page.css" %}">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{% static "css/home-slider.css" %}">
+	<link rel="stylesheet" href="{% static "css/home.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "css/home-pmonmoviroma-slider.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "./slick/slick.css" %}">
+  	<link rel="stylesheet" type="text/css" href="{% static "./slick/slick-theme.css" %}">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" 
+        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" 
+        crossorigin="anonymous">
+    </script> 
+	<style>.mySlides {display:none;}</style>
+	  <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
+
+    .slider {
+        margin: 100px auto;
+        margin-top: 30px;
+    }
+
+    .slick-slide {
+      margin: 0px 20px;
+    }
+
+    .slick-slide img {
+      width: 100%;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+      color: black;
+    }
+
+
+    .slick-slide {
+      transition: all ease-in-out .3s;
+      opacity: .2;
+    }
+    
+    .slick-active {
+      opacity: .5;
+    }
+
+    .slick-current {
+      opacity: 1;
+    }
+  </style>
+	<title>Film Sayfası</title>
+</head>
+<body>
+	<section class="header_section">
+		<div class="header_main_container">
+			<div class="header">
+				<div class="header_left">
+					<div class="menu_bar"><img src="{% static "img/bars-solid.svg" %}"></div>
+					<div class="logo_div">
+						<a href="/home"><img src="{% static "img/moviroma_logo.svg" %}"></a>
+					</div>
+				</div>
+				<div class="header_middle">
+					<div class="searchbox_div">
+						<form method='GET' action={% url 'search' %}>
+							<input type="text" id="fname" name="q" placeholder="Ara">
+							<button class="search_button" value="{{ query|escape }}" type="submit"><a href="#"><img src="{% static "img/search-solid.svg" %}"></a></button>
+						</form>
+					</div>
+				</div>
+				<div class="header_right">
+					<div class="user_menu">
+						<div class="dropdown">
+							<button class="dropbtn" type="submit" style="border: 0; background: transparent">
+							   <img src="{% static "img/user_default_icon.svg" %}" width="30" height="30" alt="submit" />
+						   </button>
+							 <div class="dropdown-content">
+							   <a href="/users/{{currentuser.id}}" >Profile</a>
+								  <a href="#">Settings</a>
+							   <a href="/logout">Logout</a>
+							 </div>
+					   </div>	
+				   </div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="content_section">
+		<div style="background-color:#A8DADC;"class="director_top_main">
+  			<div class="s-wrap s-type-1" role="slider">
+			    <input type="radio" id="s-1" name="slider-control" checked="checked">
+			    <input type="radio" id="s-2" name="slider-control">
+			    <input type="radio" id="s-3" name="slider-control">
+			    <input type="radio" id="s-4" name="slider-control">
+			    <input type="radio" id="s-5" name="slider-control">
+			    <ul class="s-content">
+			      <li class="s-item s-item-1"></li>
+			      <li class="s-item s-item-2"></li>
+			      <li class="s-item s-item-3"></li>
+			      <li class="s-item s-item-4"></li>
+			      <li class="s-item s-item-5"></li>
+			    </ul>
+			    <div class="s-control">
+			      <label class="s-c-1" for="s-1"></label>
+			      <label class="s-c-2" for="s-2"></label>
+			      <label class="s-c-3" for="s-3"></label>
+			      <label class="s-c-4" for="s-4"></label>
+			      <label class="s-c-5" for="s-5"></label>
+			    </div>
+			    <div class="s-nav">
+			      <label class="s-nav-1 right" for="s-2"></label>
+			      <label class="s-nav-2 left" for="s-1"></label>
+			      <label class="s-nav-2 right" for="s-3"></label>
+			      <label class="s-nav-3 left" for="s-2"></label>
+			      <label class="s-nav-3 right" for="s-4"></label>
+			      <label class="s-nav-4 left" for="s-3"></label>
+			      <label class="s-nav-4 right" for="s-5"></label>
+			      <label class="s-nav-5 left" for="s-4"></label>
+			    </div>
+  				</div>
+		</div>
+		<div class="director_main_content_home">
+			<div class="home_page_components">
+				<div class="home_component_desc">
+					<div class="home_component_desc_div">
+						<h2>Welcome to MOVIROMA ! </h2>
+						<p>Moviroma is a web app that you can find movies and directors for your delight. You can browse famous directors/movies and examine them.
+							Also you can share your favourite movies and get recommendations from other users. Enjoy ! </p>
+					</div>
+				</div>
+				<div class="home_component_pmonmoviroma">
+					<div class="home_component_pmonmoviroma_div">
+						<h2>Popular Movie on Moviroma</h2>
+						
+						<div class="pmonmoviroma_slider">
+							<section class="center slider">
+								{% for item in popularmovies %}								
+								<div>
+							    	<a href="/movies/{{item.film_tmdb_id}}"><img src="http://image.tmdb.org/t/p/original{{item.film_poster_linki}}"></a>
+								</div>
+								{% endfor %}
+  							</section>	
+						</div>
+					</div>
+				</div>
+				<div class="home_component_pdonmoviroma">
+					<div class="home_component_pdonmoviroma_div">
+						<h2>Popular Director on Moviroma</h2>
+						<div class="pdonmoviroma_slider">
+													<div class="pdonmoviroma_slider">
+
+					<section class="center slider">
+						{% for item in populardirectors %}	
+						<div>
+					    	<a href="/directors/{{item.yonetmen_tmdb_id}}"><img src="http://image.tmdb.org/t/p/original{{item.yonetmen_pp_linki}}"></a>
+						</div>
+						{% endfor %}
+					    <!-- <div>
+					    	<a href=""><img src="emin_alper_pp.png"></a>
+					    </div>
+					    <div>
+					    	<a href=""><img src="emin_alper_pp.png"></a>
+					    </div>
+					    <div>
+					    	<a href=""><img src="emin_alper_pp.png"></a>
+					    </div>
+					    <div>
+					    	<a href=""><img src="emin_alper_pp.png"></a>
+					    </div>
+					    <div>
+					    	<a href=""><img src="emin_alper_pp.png"></a>
+					    </div>
+					    <div>
+					    	<a href=""><img src="emin_alper_pp.png"></a>
+					    </div>
+					    <div>
+					    	<a href=""><img src="emin_alper_pp.png"></a>
+					    </div>
+					    <div>
+					    	<a href=""><img src="emin_alper_pp.png"></a>
+					    </div> -->
+  					</section>	
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script type="text/javascript">
+		
+$num = $('.my-card').length;
+$even = $num / 2;
+$odd = ($num + 1) / 2;
+
+if ($num % 2 == 0) {
+  $('.my-card:nth-child(' + $even + ')').addClass('active');
+  $('.my-card:nth-child(' + $even + ')').prev().addClass('prev');
+  $('.my-card:nth-child(' + $even + ')').next().addClass('next');
+} else {
+  $('.my-card:nth-child(' + $odd + ')').addClass('active');
+  $('.my-card:nth-child(' + $odd + ')').prev().addClass('prev');
+  $('.my-card:nth-child(' + $odd + ')').next().addClass('next');
+}
+
+$('.my-card').click(function() {
+  $slide = $('.active').width();
+  console.log($('.active').position().left);
+  
+  if ($(this).hasClass('next')) {
+    $('.card-carousel').stop(false, true).animate({left: '-=' + $slide});
+  } else if ($(this).hasClass('prev')) {
+    $('.card-carousel').stop(false, true).animate({left: '+=' + $slide});
+  }
+  
+  $(this).removeClass('prev next');
+  $(this).siblings().removeClass('prev active next');
+  
+  $(this).addClass('active');
+  $(this).prev().addClass('prev');
+  $(this).next().addClass('next');
+});
+
+
+// Keyboard nav
+$('html body').keydown(function(e) {
+  if (e.keyCode == 37) { // left
+    $('.active').prev().trigger('click');
+  }
+  else if (e.keyCode == 39) { // right
+    $('.active').next().trigger('click');
+  }
+});
+
+	</script>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+  <script src="{% static "./slick/slick.js" %}" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(document).on('ready', function() {
+      $(".vertical-center-4").slick({
+        dots: true,
+        vertical: true,
+        centerMode: true,
+        slidesToShow: 4,
+        slidesToScroll: 2
+      });
+      $(".vertical-center-3").slick({
+        dots: true,
+        vertical: true,
+        centerMode: true,
+        slidesToShow: 3,
+        slidesToScroll: 3
+      });
+      $(".vertical-center-2").slick({
+        dots: true,
+        vertical: true,
+        centerMode: true,
+        slidesToShow: 2,
+        slidesToScroll: 2
+      });
+      $(".vertical-center").slick({
+        dots: true,
+        vertical: true,
+        centerMode: true,
+      });
+      $(".vertical").slick({
+        dots: true,
+        vertical: true,
+        slidesToShow: 3,
+        slidesToScroll: 3
+      });
+      $(".regular").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 3
+      });
+      $(".center").slick({
+        dots: true,
+        infinite: true,
+        centerMode: true,
+        slidesToShow: 5,
+        slidesToScroll: 3
+      });
+      $(".variable").slick({
+        dots: true,
+        infinite: true,
+        variableWidth: true
+      });
+      $(".lazy").slick({
+        lazyLoad: 'ondemand', // ondemand progressive anticipated
+        infinite: true
+      });
+    });
+</script>
+
+</body>
+</html>

@@ -18,14 +18,14 @@
 				<div class="header_left">
 					<div class="menu_bar"><img src="{% static "img/bars-solid.svg" %}"></div>
 					<div class="logo_div">
-						<a href="/index"><img src="{% static "img/moviroma_logo.svg" %}"></a>
+						<a href="/home"><img src="{% static "img/moviroma_logo.svg" %}"></a>
 					</div>
 				</div>
 				<div class="header_middle">
 					<div class="searchbox_div">
 						<form method='GET' action={% url 'search' %}>
 							<input type="text" id="fname" name="q" placeholder="Ara">
-							<button class="search_button" value="{{ query|escape }}" type="button"><a href="#"><img src="{% static "img/search-solid.svg" %}"></a></button>
+							<button class="search_button" value="{{ query|escape }}" type="submit"><a href="#"><img src="{% static "img/search-solid.svg" %}"></a></button>
 						</form>
 					</div>
 				</div>

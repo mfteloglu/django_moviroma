@@ -1,0 +1,150 @@
+.director_main_content_home{
+	width: 100%;
+	height:1700px;
+	background-color: #A8DADC;
+}
+
+
+.home_page_components{
+	display: grid;
+  	grid-template-rows: 1fr 1fr 1fr;
+  	gap: 0px 0px;
+  	grid-template-areas:
+    "home_component_desc"
+    "home_component_pmonmoviroma"
+    "home_component_pdonmoviroma";
+}
+
+.home_component_desc{
+	grid-area: home_component_desc;
+	width: 100%;
+	height: 400px;
+}
+
+.home_component_pmonmoviroma{
+	grid-area: home_component_pmonmoviroma;
+	width: 100%;
+	height: 400px;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 28px;
+	color: #1D3557;
+}
+
+.home_component_pdonmoviroma{
+	grid-area: home_component_pdonmoviroma;
+	width: 100%;
+	height: 400px;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 28px;
+	color: #1D3557;
+}
+
+
+.home_component_desc_div{
+	width:1100px;
+	height:300px;
+	background-color: #F1FAEE;
+	margin:0 auto;
+	margin-top: 55px;
+	padding-left:30px;
+	padding-right: 30px;
+	padding-top: 30px;
+}
+
+.home_component_desc_div h2{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 28px;
+	color: #1D3557;
+	padding: 0px;
+	margin: 0px;
+}
+
+.home_component_desc_div p{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 28px;
+	color: #1D3557;
+	padding: 0px;
+	margin: 0px;
+	margin-top: 30px;
+}
+
+.home_component_pmonmoviroma_div{
+	width:1100px;
+	height:400px;
+	background-color: #F1FAEE;
+	margin:0 auto;
+	margin-top: 55px;
+	padding-left:30px;
+	padding-right: 30px;
+	padding-top: 30px;
+}
+
+.home_component_pmonmoviroma_div h2{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 28px;
+	color: #1D3557;
+	padding: 0px;
+	margin: 0px;
+}
+
+.pmonmoviroma_slider{
+	width: 1040px;
+	height: 300px;
+}
+
+.pmonmoviroma_slider img{
+	width: 200px;
+	height: 250px;
+}
+
+
+
+.home_component_pdonmoviroma_div{
+	width:1100px;
+	height:400px;
+	background-color: #F1FAEE;
+	margin:0 auto;
+	margin-top: 260px;
+	padding-left:30px;
+	padding-right: 30px;
+	padding-top: 30px;
+}
+
+.home_component_pdonmoviroma_div h2{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 28px;
+	color: #1D3557;
+	padding: 0px;
+	margin: 0px;
+}
+
+
+.pdonmoviroma_slider{
+	width: 1040px;
+	height: 300px;
+}
+
+.pdonmoviroma_slider img{
+	width: 200px;
+	height: 200px;
+}
+
+

@@ -1,4 +1,4 @@
 Welcome to MOVIROMA ! 
 
 Moviroma is a web app that you can find movies and directors for your delight. You can browse famous directors/movies and examine them.
-Also you can share your favourite movies and get recommendations from other users.
+Also you can share your favourite movies and get recommendations from other users. Enjoy ! 

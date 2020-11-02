@@ -8,6 +8,9 @@ from django.contrib.auth import authenticate, login, logout
 from .models import YonetmenDetay,FilmDetay,likedmovies,likeddirectors,AuthUser,Followers
 from django.db.models import Q
 from django.contrib.auth.models import User
+from register.utils import get_everything_as_array,find_popular_movies,find_popular_directors
+import json
+from django.core import serializers
 
 # Create your views here.
 
@@ -29,7 +32,7 @@ def login_view(request):
         if form.is_valid():
             user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             login(request,user)
-            return redirect("/index")
+            return redirect("/home")
     else:
         form = AuthenticationForm()
     return render(request, "moviroma/home-login.html", {"form": form})
@@ -43,10 +46,27 @@ def logout_view(request):
 
 def index(request):
     if not request.user.is_authenticated:
+        return redirect("/login")
+    else:
+        return redirect("/home")
+
+def home(request):
+    if not request.user.is_authenticated:
         return render(request,"moviroma/404error.html")
     else:
-        return render(request,"moviroma/yonetmen_main_page.html")
+        current_user = request.user
+        current_user_1 = AuthUser.objects.filter(username=current_user.username).first()
 
+        popular_movies_on_moviroma = []
+        for item in find_popular_movies(9):
+            popular_movies_on_moviroma.append(FilmDetay.objects.filter(film_title=item).first())
+
+        popular_directors_on_moviroma = []
+        for item in find_popular_directors(9):
+            popular_directors_on_moviroma.append(YonetmenDetay.objects.filter(yonetmen_ad=item).first())
+
+        context = {'popularmovies': popular_movies_on_moviroma,'populardirectors': popular_directors_on_moviroma ,'currentuser': current_user_1}
+        return render(request,"moviroma/home.html",context)       
 
 def director_view(request,id):
     if not request.user.is_authenticated:
@@ -85,7 +105,13 @@ def director_view(request,id):
             if item.film_yayinlanma_tarihi:
                 if item.startdate_as_date()==latest:
                     latestmovie = item
-        context = {'person': selecteddirector,'movies': sorteddirectorsmovies, 'latestmovie': latestmovie, 'likedmovies': playlist.movies, 'likeddirectors': playlist1.directors,'currentuser': current_user_1}
+
+        #everything1 = json.dumps(get_everything_as_array())
+        everything1 = serializers.serialize('json',YonetmenDetay.objects.all())
+
+        context = {'person': selecteddirector,'movies': sorteddirectorsmovies, 'latestmovie': latestmovie, 'likedmovies': playlist.movies, 'likeddirectors': playlist1.directors,'currentuser': current_user_1,'everything': everything1}
+        
+        
         return render(request,"moviroma/yonetmen_main_page.html",context)
 
 def movie_view(request,id):
@@ -182,6 +208,7 @@ def searchdirector(request):
        results= []
        numberofresults = 0
        numberofresultsmovie = 0
+       numberofresultsdirector = 0
 
        context = {'searchedperson': results,'numberofsearchedperson': numberofresultsdirector,'numberofsearchedmovie': numberofresultsmovie,'search': query}
     return render(request, "moviroma/searchdirector.html", context)

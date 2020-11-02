@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 
 	<link rel="stylesheet" type="text/css" href="{% static "css/yonetmen_page.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "css/deneme.css" %}">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 	<title>{{person.yonetmen_ad}}</title>
@@ -16,16 +17,27 @@
 				<div class="header_left">
 					<div class="menu_bar"><img src="{% static "img/bars-solid.svg" %}"></div>
 					<div class="logo_div">
-						<a href="/index"><img src="{% static "img/moviroma_logo.svg" %}"></a>
+						<a href="/home"><img src="{% static "img/moviroma_logo.svg" %}"></a>
 					</div>
 				</div>
+
+				
+				
 				<div class="header_middle">
 					<div class="searchbox_div">
 						<form method='GET' action={% url 'search' %}>
 							<input type="text" id="fname" name="q" placeholder="Ara">
-							<button class="search_button" value="{{ query|escape }}" type="button"><a href="#"><img src="{% static "img/search-solid.svg" %}"></a></button>
+							<button class="search_button" value="{{ query|escape }}" type="submit"><a href="#"><img src="{% static "img/search-solid.svg" %}"></a></button>
 						</form>
 					</div>
+					<!-- <div class="searchbox_div">
+						<form method='GET' autocomplete="off" action={% url 'search' %}>
+							<div class="autocomplete" style="width:300px;">
+							<input type="text" id="fname" name="q" placeholder="Ara">
+						</div>
+							<button class="search_button" value="{{ query|escape }}" type="button"><a href="#"><img src="{% static "img/search-solid.svg" %}"></a></button>
+						</form>
+					</div> -->
 					<ul>
 						{% for item in searchedperson %}
 							<li><a href="{% url 'directorview' id=item.pk %}" style="color: white;">{{ item.yonetmen_ad }}</a></li>
@@ -141,5 +153,7 @@
 				</div>
 			</div>
 	</section>
+
+	
 </body>
 </html>
