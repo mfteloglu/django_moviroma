@@ -52,7 +52,7 @@ def find_popular_directors(howmany):
             popular_directors.append(most_common(all_liked_directors_array))
             all_liked_directors_array = [x for x in all_liked_directors_array if x != most_common(all_liked_directors_array)]
     else :
-        for i in range(0,len(all_liked_directors_array)):
+        for i in range(0,len(all_liked_directors_array)-1):
             popular_directors.append(most_common(all_liked_directors_array))
             all_liked_directors_array = [x for x in all_liked_directors_array if x != most_common(all_liked_directors_array)]
 
