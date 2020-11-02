@@ -943,6 +943,16 @@ input[type=text] {
 	color: #F1FAEE;
 }
 
+.aboutus{
+	font-size: 30px;
+}
+.gmail{
+	font-size: 18px;
+	font-family: Roboto;
+	margin-top: -34px;
+	margin-left: 60px;
+}
+
 
 @media screen and (max-width: 1400px){
 	.header_main_container{

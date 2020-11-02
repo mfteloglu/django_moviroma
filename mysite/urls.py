@@ -26,6 +26,7 @@ urlpatterns = [
     path("", v.index, name="index"),
     path('login/', v.login_view, name='login'),
     path('home/', v.home,name="home"),
+    path('aboutus/', v.aboutus,name="aboutus"),
     path('logout/', v.logout_view, name="logout"),
     path('directors/<int:id>/', v.director_view,name="directorview"),
     path('movies/<int:id>/', v.movie_view ,name="movieview"),

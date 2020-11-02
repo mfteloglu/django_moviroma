@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="{% static "css/yonetmen_page.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "css/film_page.css" %}">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<style>.mySlides {display:none;}</style>
+	<title>Film Sayfası</title>
+</head>
+<body>
+	<section class="header_section">
+		<div class="header_main_container">
+			<div class="header">
+				<div class="header_left">
+					<div class="menu_bar"><img src="{% static "img/bars-solid.svg" %}"></div>
+					<div class="logo_div">
+						<a href="/home"><img src="{% static "img/moviroma_logo.svg" %}"></a>
+					</div>
+				</div>
+				<div class="header_middle">
+					<div class="searchbox_div">
+						<form method='GET' action={% url 'search' %}>
+							<input type="text" id="fname" name="q" placeholder="Ara">
+							<button class="search_button" value="{{ query|escape }}" type="submit"><a href="#"><img src="{% static "img/search-solid.svg" %}"></a></button>
+						</form>
+					</div>
+				</div>
+				<div class="header_right">
+					<div class="user_menu">
+						 <div class="dropdown">
+						 	<button class="dropbtn" type="submit" style="border: 0; background: transparent">
+    							<img src="{% static "img/user_default_icon.svg" %}" width="30" height="30" alt="submit" />
+							</button>
+  							<div class="dropdown-content">
+    							<a href="/users/{{currentuser.id}}">Profile</a>
+   								<a href="#">Settings</a>
+    							<a href="/logout">Logout</a>
+  							</div>
+        				</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="content_section">
+
+        <div class="aboutus">
+            <p>Mehmet Fatih Teloğlu<br></p><img src="{% static "img/gmail.svg" %}" width="30" height="30"/>
+            <p class="gmail">mfteloglu@gmail.com</p>
+            <img src="{% static "img/instagram.svg" %}" width="30" height="30"/>
+            <p class="gmail">@mfteloglu</p>
+
+            <p>Enes Erkam Ateş<br></p><img src="{% static "img/gmail.svg" %}" width="30" height="30"/>
+            <p class="gmail">eneserkamates@gmail.com</p>
+            <img src="{% static "img/instagram.svg" %}" width="30" height="30"/>
+            <p class="gmail">@eeates</p>
+        </div>
+	</section>
+</body>
+</html>

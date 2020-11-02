@@ -50,6 +50,12 @@ def index(request):
     else:
         return redirect("/home")
 
+def aboutus(request):
+    if not request.user.is_authenticated:
+        return render(request,"moviroma/404error.html")
+    else:
+        return render(request,"moviroma/aboutus.html")
+
 def home(request):
     if not request.user.is_authenticated:
         return render(request,"moviroma/404error.html")
