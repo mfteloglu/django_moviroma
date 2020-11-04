@@ -1,5 +1,6 @@
 from .models import YonetmenDetay,FilmDetay,likedmovies,likeddirectors,AuthUser,Followers
 from django.db.models import Q
+from collections import Counter 
 #from django.contrib.auth.models import User
 
 def get_everything_as_array():
@@ -11,6 +12,9 @@ def get_everything_as_array():
     for item in AuthUser.objects.all():
         everything.append(item)
     return everything
+
+def countDistinct(arr): 
+    return len(Counter(arr).keys()) 
 
 def most_common(lst):
     return max(set(lst), key=lst.count)
@@ -25,12 +29,12 @@ def find_popular_movies(howmany):
 
     popular_movies = []
 
-    if len(all_liked_movies_array) > howmany :
+    if countDistinct(all_liked_movies_array) > howmany :
         for i in range(0,howmany):
             popular_movies.append(most_common(all_liked_movies_array))
             all_liked_movies_array = [x for x in all_liked_movies_array if x != most_common(all_liked_movies_array)]
     else :
-        for i in range(0,len(all_liked_movies_array)):
+        for i in range(0,countDistinct(all_liked_movies_array)):
             popular_movies.append(most_common(all_liked_movies_array))
             all_liked_movies_array = [x for x in all_liked_movies_array if x != most_common(all_liked_movies_array)]
 
@@ -47,12 +51,12 @@ def find_popular_directors(howmany):
 
     popular_directors = []
 
-    if len(all_liked_directors_array) > howmany :
+    if countDistinct(all_liked_directors_array) > howmany :
         for i in range(0,howmany):
             popular_directors.append(most_common(all_liked_directors_array))
             all_liked_directors_array = [x for x in all_liked_directors_array if x != most_common(all_liked_directors_array)]
     else :
-        for i in range(0,len(all_liked_directors_array)-1):
+        for i in range(0,countDistinct(all_liked_directors_array)):
             popular_directors.append(most_common(all_liked_directors_array))
             all_liked_directors_array = [x for x in all_liked_directors_array if x != most_common(all_liked_directors_array)]
 
