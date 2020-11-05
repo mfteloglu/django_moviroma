@@ -157,6 +157,7 @@ input[type=text] {
 	grid-template-rows: 4fr 0.1fr 2fr 1fr;
 }
 
+
 .director_pp{
 	grid-area: director_pp;
 	width: 100%;
@@ -213,6 +214,26 @@ input[type=text] {
 	line-height: 75px;
 	text-align: center;
 	color: #F1FAEE;
+}
+
+/* FOLLOWER COUNT CSS SHOULD BE ARRANGED */
+.follower_count{
+	grid-area: director_verified;
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
+.follower_count h6{
+	padding: 0px;
+	margin: 0px;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	text-align: center;
+	color:gray;
 }
 
 .director_buttons{

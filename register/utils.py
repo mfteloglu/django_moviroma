@@ -62,3 +62,13 @@ def find_popular_directors(howmany):
 
 
     return popular_directors
+
+def find_followers_of_user(whichuser):
+    all_followers = []
+    for item in Followers.objects.all():
+        if whichuser in item.followed:
+            all_followers.append(AuthUser.objects.filter(id=item.user_id).first().username)
+
+    return all_followers
+
+

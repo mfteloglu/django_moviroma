@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import YonetmenDetay,FilmDetay,likedmovies,likeddirectors,AuthUser,Followers
 from django.db.models import Q
 from django.contrib.auth.models import User
-from register.utils import get_everything_as_array,find_popular_movies,find_popular_directors
+from register.utils import get_everything_as_array,find_popular_movies,find_popular_directors,find_followers_of_user
 import json
 from django.core import serializers
 
@@ -186,7 +186,18 @@ def user_view(request,id):
             if YonetmenDetay.objects.filter(yonetmen_ad=item).first():
                 selected_person_liked_directors_2.append(YonetmenDetay.objects.filter(yonetmen_ad=item).first())
 
-        context = {'person': selected_person,'likedmovies': playlist.movies, 'likeddirectors': playlist1.directors,'selectedpersonlikedmovies': selected_person_liked_movies_2,'selectedpersonlikeddirectors': selected_person_liked_directors_2,'selectedpersonfollowedusers': playlist2.followed,'currentuser': current_user_1}
+        selected_person_followers = find_followers_of_user(selected_person.username)
+        selected_person_followers_count = len(selected_person_followers)
+
+        context = {'person': selected_person,
+        'likedmovies': playlist.movies, 
+        'likeddirectors': playlist1.directors,
+        'selectedpersonlikedmovies': selected_person_liked_movies_2,
+        'selectedpersonlikeddirectors': selected_person_liked_directors_2,
+        'selectedpersonfollowedusers': playlist2.followed,
+        'selectedpersonfollowers': selected_person_followers,
+        'selectedpersonfollowerscount': selected_person_followers_count,
+        'currentuser': current_user_1}
         return render(request,"moviroma/user_page.html",context)
 
 def searchdirector(request):
